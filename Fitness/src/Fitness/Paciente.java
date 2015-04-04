@@ -20,6 +20,11 @@ public class Paciente {
     private String telefono;
     private String cedula;
     private Medida medida;
+    
+    public Paciente(String pNombre)
+    {
+        nombre = pNombre;
+    }
 
     /**
      * @return the nombre
