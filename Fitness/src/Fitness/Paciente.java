@@ -6,25 +6,51 @@
 package Fitness;
 
 import java.time.LocalDate;
+import org.simpleframework.xml.Attribute;
+import org.simpleframework.xml.Element;
+import org.simpleframework.xml.Root;
 
 /**
  *
  * @author will
  */
+@Root
 public class Paciente {
+
+    public Paciente()
+    {
+        
+    }
     
+    public Paciente(String nombre, char sexo, String email, String telefono, String cedula, Medida medida) {
+        this.nombre = nombre;
+        this.sexo = sexo;
+        this.email = email;
+        this.telefono = telefono;
+        this.cedula = cedula;
+        this.medida = medida;
+    }
+    
+    @Element(required=false)
     private String nombre;
+    
+    @Element(required=false)
     private char sexo;
+    
+    @Element(required=false)
     private String email;
-    private LocalDate fechaNacimiento;
+    
+    
+    @Element(required=false)
     private String telefono;
+    
+    @Attribute(required=false)
     private String cedula;
+    
+    @Element(required=false)
     private Medida medida;
     
-    public Paciente(String pNombre)
-    {
-        nombre = pNombre;
-    }
+    
 
     /**
      * @return the nombre
@@ -68,19 +94,7 @@ public class Paciente {
         this.email = email;
     }
 
-    /**
-     * @return the fechaNacimiento
-     */
-    public LocalDate getFechaNacimiento() {
-        return fechaNacimiento;
-    }
-
-    /**
-     * @param fechaNacimiento the fechaNacimiento to set
-     */
-    public void setFechaNacimiento(LocalDate fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
-    }
+    
 
     /**
      * @return the telefono

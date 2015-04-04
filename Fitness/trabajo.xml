@@ -1,0 +1,16 @@
+<ListWrapper>
+   <pacientes class="java.util.ArrayList">
+      <paciente cedula="dsfdsf">
+         <nombre>Will</nombre>
+         <sexo>M</sexo>
+      </paciente>
+      <paciente cedula="3456">
+         <nombre>Edwin</nombre>
+         <sexo>M</sexo>
+      </paciente>
+      <paciente cedula="1334">
+         <nombre>Sha</nombre>
+         <sexo>M</sexo>
+      </paciente>
+   </pacientes>
+</ListWrapper>

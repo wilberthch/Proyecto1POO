@@ -7,10 +7,15 @@ package GUI;
 
 import Fitness.Paciente;
 import Fitness.PersistenciaDatos;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -23,6 +28,9 @@ public class Menu extends javax.swing.JFrame {
      */
     public Menu() {
         initComponents();
+        
+        
+        
     }
 
     /**
@@ -35,6 +43,8 @@ public class Menu extends javax.swing.JFrame {
     private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -45,21 +55,43 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(102, 102, 102)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
                 .addComponent(jButton1)
-                .addContainerGap(226, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addComponent(jButton1)
-                .addContainerGap(229, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(13, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addContainerGap())
         );
 
         pack();
@@ -67,19 +99,66 @@ public class Menu extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         PersistenciaDatos persistente = new PersistenciaDatos("trabajo");
-        ArrayList<Paciente> pacientes = new ArrayList<>();
-        pacientes.add(new Paciente("Will"));
-        pacientes.add(new Paciente("Edwin"));
-        pacientes.add(new Paciente("Sha"));
+        List<Paciente> pacientes = new ArrayList<>();
+        Paciente paciente1 = new Paciente();
+        paciente1.setNombre("Will");
+        paciente1.setCedula("dsfdsf");
+        paciente1.setEmail(null);
+        paciente1.setSexo('M');
+        paciente1.setTelefono(null);
+        Paciente paciente2 = new Paciente();
+        paciente2.setNombre("Edwin");
+        paciente2.setCedula("3456");
+        paciente2.setEmail(null);
+        paciente2.setSexo('M');
+        paciente2.setTelefono(null);
+        Paciente paciente3 = new Paciente();
+        paciente3.setNombre("Sha");
+        paciente3.setCedula("1334");
+        paciente3.setEmail(null);
+        paciente3.setSexo('M');
+        paciente3.setTelefono(null);
+        pacientes.add(0,paciente1);
+        pacientes.add(1,paciente2);
+        pacientes.add(2,paciente3);
+        ListWrapper contenedor = new ListWrapper(pacientes);
+        String[][] elementos = new String[3][2];
         try {
-            persistente.guardar((Object)pacientes);
-            //ArrayList<Paciente> NewPacientes persistente.restaurarObjecto(Paciente.class);
+            persistente.guardar((Object)contenedor);
+            //persistente.guardar((Object)"1");
+            ListWrapper NewPacientes = persistente.restaurarObjecto(ListWrapper.class);
+            String hola = persistente.restaurarObjecto(String.class);
+            
+            
+            List<Paciente> prueba = NewPacientes.getPacientes();
+            for(int index = 0; index < prueba.size(); index++)
+            {
+                elementos[index][0] = prueba.get(index).getNombre();
+                elementos[index][1] = prueba.get(index).getCedula();
+                
+            }
+            String[] columnasNombres = {"pacientes", "Cedula"};
+            
+            
+            PacientesTableModel model = new PacientesTableModel();
+            model.setDataVector(elementos, columnasNombres);
+            jTable1.setModel(model);
+            
+            
             
         } catch (Exception ex) {
             Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        JTable miTabla = (JTable)evt.getSource();
+        int indexCol = miTabla.getSelectedColumn();
+        int indexRow = miTabla.getSelectedRow();
+        String elemento = (String)miTabla.getValueAt(indexRow, indexCol);
+        JOptionPane.showMessageDialog(this, elemento);
+    }//GEN-LAST:event_jTable1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -118,5 +197,7 @@ public class Menu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
