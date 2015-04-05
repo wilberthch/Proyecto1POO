@@ -83,6 +83,7 @@ public class Menu extends javax.swing.JFrame {
     private void PacientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PacientesActionPerformed
         MenuPaciente menuPaciente = new MenuPaciente();
         menuPaciente.setVisible(true);
+        
     }//GEN-LAST:event_PacientesActionPerformed
 
     /**

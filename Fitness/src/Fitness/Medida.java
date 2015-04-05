@@ -13,25 +13,64 @@ public class Medida {
     
     private double estatura;
     private double peso;
-    private int triceps;
-    private int subescapular;
-    private int abdomen;
-    private int iliaco;
-    private int muslo;
-    private int pantorrilla;
-    private int pectoral;
-    private int espalda;
-    private int cintura1;
-    private int cintura2;
-    private int cintura3;
-    private int cadera;
-    private int musloDerecho;
-    private int musloIzquierdo;
-    private int pantorrillaDerecha;
-    private int pantorrillaIzquierda;
+    private double triceps;
+    private double subescapular;
+    private double abdomen;
+    private double iliaco;
+    private double muslo;
+    private double pantorrilla;
+    private double cuello;
+    private double bicepDer;
+    private double bicepIzq;
+    private double pectoral;
+    private double pectoralCircum;
+
+    private double espalda;
+    private double cintura1;
+    private double cintura2;
+    private double cintura3;
+    private double cadera;
+    private double musloDerecho;
+    private double musloIzquierdo;
+    private double pantorrillaDerecha;
+    private double pantorrillaIzquierda;
     private int frecuenciaCardiacaReposo;
-    private int presionArterialSistolica;
-    private int presionArterialDiastolica;
+    private double presionArterialSistolica;
+    private double presionArterialDiastolica;
+
+    
+    
+    public void setPectoralCircum(double pectoralCircum) {
+        this.pectoralCircum = pectoralCircum;
+    }
+
+    public double getPectoralCircum() {
+        return pectoralCircum;
+    }
+    public void setCuello(double cuello) {
+        this.cuello = cuello;
+    }
+
+    public void setBicepDer(double bicepDer) {
+        this.bicepDer = bicepDer;
+    }
+
+    public void setBicepIzq(double bicepIzq) {
+        this.bicepIzq = bicepIzq;
+    }
+
+    public double getCuello() {
+        return cuello;
+    }
+
+    public double getBicepDer() {
+        return bicepDer;
+    }
+
+    public double getBicepIzq() {
+        return bicepIzq;
+    }
+    
 
 
     public double getEstatura() {
@@ -50,131 +89,131 @@ public class Medida {
         this.peso = peso;
     }
 
-    public int getTriceps() {
+    public double getTriceps() {
         return triceps;
     }
 
-    public void setTriceps(int triceps) {
+    public void setTriceps(double triceps) {
         this.triceps = triceps;
     }
 
-    public int getSubescapular() {
+    public double getSubescapular() {
         return subescapular;
     }
 
-    public void setSubescapular(int subescapular) {
+    public void setSubescapular(double subescapular) {
         this.subescapular = subescapular;
     }
 
-    public int getAbdomen() {
+    public double getAbdomen() {
         return abdomen;
     }
 
-    public void setAbdomen(int abdomen) {
+    public void setAbdomen(double abdomen) {
         this.abdomen = abdomen;
     }
 
-    public int getIliaco() {
+    public double getIliaco() {
         return iliaco;
     }
 
-    public void setIliaco(int iliaco) {
+    public void setIliaco(double iliaco) {
         this.iliaco = iliaco;
     }
 
-    public int getMuslo() {
+    public double getMuslo() {
         return muslo;
     }
 
-    public void setMuslo(int muslo) {
+    public void setMuslo(double muslo) {
         this.muslo = muslo;
     }
 
-    public int getPantorrilla() {
+    public double getPantorrilla() {
         return pantorrilla;
     }
 
-    public void setPantorrilla(int pantorrilla) {
+    public void setPantorrilla(double pantorrilla) {
         this.pantorrilla = pantorrilla;
     }
 
-    public int getPectoral() {
+    public double getPectoral() {
         return pectoral;
     }
 
-    public void setPectoral(int pectoral) {
+    public void setPectoral(double pectoral) {
         this.pectoral = pectoral;
     }
 
-    public int getEspalda() {
+    public double getEspalda() {
         return espalda;
     }
 
-    public void setEspalda(int espalda) {
+    public void setEspalda(double espalda) {
         this.espalda = espalda;
     }
 
-    public int getCintura1() {
+    public double getCintura1() {
         return cintura1;
     }
 
-    public void setCintura1(int cintura1) {
+    public void setCintura1(double cintura1) {
         this.cintura1 = cintura1;
     }
 
-    public int getCintura2() {
+    public double getCintura2() {
         return cintura2;
     }
 
-    public void setCintura2(int cintura2) {
+    public void setCintura2(double cintura2) {
         this.cintura2 = cintura2;
     }
 
-    public int getCintura3() {
+    public double getCintura3() {
         return cintura3;
     }
 
-    public void setCintura3(int cintura3) {
+    public void setCintura3(double cintura3) {
         this.cintura3 = cintura3;
     }
 
-    public int getCadera() {
+    public double getCadera() {
         return cadera;
     }
 
-    public void setCadera(int cadera) {
+    public void setCadera(double cadera) {
         this.cadera = cadera;
     }
 
-    public int getMusloDerecho() {
+    public double getMusloDerecho() {
         return musloDerecho;
     }
 
-    public void setMusloDerecho(int musloDerecho) {
+    public void setMusloDerecho(double musloDerecho) {
         this.musloDerecho = musloDerecho;
     }
 
-    public int getMusloIzquierdo() {
+    public double getMusloIzquierdo() {
         return musloIzquierdo;
     }
 
-    public void setMusloIzquierdo(int musloIzquierdo) {
+    public void setMusloIzquierdo(double musloIzquierdo) {
         this.musloIzquierdo = musloIzquierdo;
     }
 
-    public int getPantorrillaDerecha() {
+    public double getPantorrillaDerecha() {
         return pantorrillaDerecha;
     }
 
-    public void setPantorrillaDerecha(int pantorrillaDerecha) {
+    public void setPantorrillaDerecha(double pantorrillaDerecha) {
         this.pantorrillaDerecha = pantorrillaDerecha;
     }
 
-    public int getPantorrillaIzquierda() {
+    public double getPantorrillaIzquierda() {
         return pantorrillaIzquierda;
     }
 
-    public void setPantorrillaIzquierda(int pantorrillaIzquierda) {
+    public void setPantorrillaIzquierda(double pantorrillaIzquierda) {
         this.pantorrillaIzquierda = pantorrillaIzquierda;
     }
 
@@ -186,19 +225,19 @@ public class Medida {
         this.frecuenciaCardiacaReposo = frecuenciaCardiacaReposo;
     }
 
-    public int getPresionArterialSistolica() {
+    public double getPresionArterialSistolica() {
         return presionArterialSistolica;
     }
 
-    public void setPresionArterialSistolica(int presionArterialSistolica) {
+    public void setPresionArterialSistolica(double presionArterialSistolica) {
         this.presionArterialSistolica = presionArterialSistolica;
     }
 
-    public int getPresionArterialDiastolica() {
+    public double getPresionArterialDiastolica() {
         return presionArterialDiastolica;
     }
 
-    public void setPresionArterialDiastolica(int presionArterialDiastolica) {
+    public void setPresionArterialDiastolica(double presionArterialDiastolica) {
         this.presionArterialDiastolica = presionArterialDiastolica;
     }
     
