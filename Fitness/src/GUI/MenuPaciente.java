@@ -29,7 +29,7 @@ public class MenuPaciente extends javax.swing.JFrame {
     public static List<Paciente> pacientes = new ArrayList<>();
     public static int numeroPacientes = 0;
     public static Paciente temp;
-    public static int posPaciente = 0;
+    public static int posPaciente;
     public MenuPaciente() {
         initComponents();
         
@@ -301,6 +301,10 @@ public class MenuPaciente extends javax.swing.JFrame {
         
         char genero;
         String pSexo = (String) sexo.getSelectedItem();
+        if ("None".equals(pSexo)){
+            JOptionPane.showMessageDialog(this, "Tiene que elegir el sexo");
+            return;
+        }
         if ("Hombre".equals(pSexo)){
             genero = 'M';
         } else {
@@ -455,7 +459,10 @@ public class MenuPaciente extends javax.swing.JFrame {
         String pSexo=(String) sexo.getSelectedItem();
         String pTelefono=(String) telefono.getText();
         String pEmail=(String) email.getText();
-        
+        if ("None".equals(pSexo)){
+            JOptionPane.showMessageDialog(this, "Tiene que elegir el sexo");
+            return;
+        }
         char genero;
         if ("Hombre".equals(pSexo)){
             genero = 'M';

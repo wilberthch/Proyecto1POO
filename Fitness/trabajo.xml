@@ -2,7 +2,7 @@
    <pacientes class="java.util.ArrayList">
       <paciente cedula="3">
          <nombre>e</nombre>
-         <sexo>F</sexo>
+         <sexo>M</sexo>
          <email>@.com</email>
          <telefono>3</telefono>
          <fechadenacimiento>
