@@ -42,136 +42,48 @@ public class Menu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jComboBox1 = new javax.swing.JComboBox();
+        Pacientes = new javax.swing.JButton();
+        Configuracion = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        Pacientes.setText("Pacientes");
+        Pacientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                PacientesActionPerformed(evt);
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable1MouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(jTable1);
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        Configuracion.setText("Configuracion");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(43, 43, 43))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(95, 95, 95)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(Configuracion, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Pacientes, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(117, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(13, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(138, 138, 138)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
-                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(49, 49, 49)
+                .addComponent(Pacientes, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(Configuracion, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        PersistenciaDatos persistente = new PersistenciaDatos("trabajo");
-        List<Paciente> pacientes = new ArrayList<>();
-        Paciente paciente1 = new Paciente();
-        paciente1.setNombre("Will");
-        paciente1.setCedula("dsfdsf");
-        paciente1.setEmail(null);
-        paciente1.setSexo('M');
-        paciente1.setTelefono(null);
-        Paciente paciente2 = new Paciente();
-        paciente2.setNombre("Edwin");
-        paciente2.setCedula("3456");
-        paciente2.setEmail(null);
-        paciente2.setSexo('M');
-        paciente2.setTelefono(null);
-        Paciente paciente3 = new Paciente();
-        paciente3.setNombre("Sha");
-        paciente3.setCedula("1334");
-        paciente3.setEmail(null);
-        paciente3.setSexo('M');
-        paciente3.setTelefono(null);
-        pacientes.add(0,paciente1);
-        pacientes.add(1,paciente2);
-        pacientes.add(2,paciente3);
-        ListWrapper contenedor = new ListWrapper(pacientes);
-        String[][] elementos = new String[3][2];
-        try {
-            persistente.guardar((Object)contenedor);
-            //persistente.guardar((Object)"1");
-            ListWrapper NewPacientes = persistente.restaurarObjecto(ListWrapper.class);
-            String hola = persistente.restaurarObjecto(String.class);
-            
-            
-            List<Paciente> prueba = NewPacientes.getPacientes();
-            for(int index = 0; index < prueba.size(); index++)
-            {
-                elementos[index][0] = prueba.get(index).getNombre();
-                elementos[index][1] = prueba.get(index).getCedula();
-                
-            }
-            String[] columnasNombres = {"pacientes", "Cedula"};
-            
-            
-            PacientesTableModel model = new PacientesTableModel();
-            model.setDataVector(elementos, columnasNombres);
-            jTable1.setModel(model);
-            
-            
-            
-        } catch (Exception ex) {
-            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        JTable miTabla = (JTable)evt.getSource();
-        int indexCol = miTabla.getSelectedColumn();
-        int indexRow = miTabla.getSelectedRow();
-        String elemento = (String)miTabla.getValueAt(indexRow, indexCol);
-        JOptionPane.showMessageDialog(this, elemento);
-    }//GEN-LAST:event_jTable1MouseClicked
+    private void PacientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PacientesActionPerformed
+        MenuPaciente menuPaciente = new MenuPaciente();
+        menuPaciente.setVisible(true);
+    }//GEN-LAST:event_PacientesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -209,9 +121,7 @@ public class Menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JButton Configuracion;
+    private javax.swing.JButton Pacientes;
     // End of variables declaration//GEN-END:variables
 }
