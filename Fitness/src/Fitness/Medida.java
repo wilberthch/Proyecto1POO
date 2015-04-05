@@ -33,6 +33,7 @@ public class Medida {
     private int presionArterialSistolica;
     private int presionArterialDiastolica;
 
+
     public double getEstatura() {
         return estatura;
     }
@@ -202,21 +203,33 @@ public class Medida {
     }
     
     
-    public double calcPorcentajeMasaCorporal()
+    public double calcPorcentajeGrasaCorporal(int pEdad, char genero)
     {
-        double res = peso * (estatura * estatura);
-        
+        int sexo = 0;
+        if (genero == 'M'){
+            sexo = 1;
+        }
+        double IMC = peso / (estatura * estatura);
+        double res = (1.20*IMC)+ (0.23*pEdad)-(10.8*sexo)-5.4;
         return res;
         
     }
     
     public double calcPorcentajeMasaMuscular()
     {
-        double res = peso * (estatura * estatura);
+        double res = peso / (estatura * estatura);
         
         return res;
         
     }
+    public double calcRelacionCinturaCadera(){
+        double cintura = (cintura1+cintura2 +cintura3)/3;
+        double res = cintura/cadera;
+        return res;
+    }
     
-    
+    public int calcFrecuenciaCard(int pEdad){
+        int res = 220 - pEdad;
+        return res;
+    }
 }
