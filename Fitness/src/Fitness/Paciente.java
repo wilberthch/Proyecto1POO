@@ -5,30 +5,31 @@
  */
 package Fitness;
 
-import java.time.LocalDate;
+
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
-
 /**
  *
  * @author will
  */
 @Root
 public class Paciente {
+    
 
     public Paciente()
     {
         
     }
     
-    public Paciente(String nombre, char sexo, String email, String telefono, String cedula, Medida medida) {
+    public Paciente(String nombre, char sexo, String email, String telefono, String cedula, Medida medida, Fecha fechadenacimiento) {
         this.nombre = nombre;
         this.sexo = sexo;
         this.email = email;
         this.telefono = telefono;
         this.cedula = cedula;
         this.medida = medida;
+        this.fechadenacimiento = fechadenacimiento;
     }
     
     @Element(required=false)
@@ -50,6 +51,8 @@ public class Paciente {
     @Element(required=false)
     private Medida medida;
     
+    @Element(required=false)
+    private Fecha fechadenacimiento = new Fecha();
     
 
     /**
@@ -137,5 +140,25 @@ public class Paciente {
     public void setMedida(Medida medida) {
         this.medida = medida;
     }
+    /**
+     * @param fechadenacimiento the fechadenacimiento to set
+     */
+    public void setFechadeNacimiento(String pDia,String pMes,String pAnio){
+        fechadenacimiento.setDia(pDia);
+        fechadenacimiento.setMes(pMes);
+        fechadenacimiento.setAnio(pAnio);
+    }
     
+    /**
+     * @return the fechadenacimiento
+     */
+    public String getDiaFechadeNacimiento(){
+        return fechadenacimiento.getDia();
+    }
+    public String getMesFechadeNacimiento(){
+        return fechadenacimiento.getMes();
+    }
+    public String getAnioFechadeNacimiento(){
+        return fechadenacimiento.getAnio();
+    }
 }
