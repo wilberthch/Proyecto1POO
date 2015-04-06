@@ -1,15 +1,7 @@
 <ListWrapper>
    <pacientes class="java.util.ArrayList">
       <paciente cedula="1">
-         <nombre>w</nombre>
+         <nombre>q</nombre>
          <sexo>M</sexo>
          <email>@.com</email>
          <telefono>1</telefono>
-         <fechadenacimiento>
-            <Anio>2015</Anio>
-            <Mes>1</Mes>
-            <Dia>1</Dia>
-         </fechadenacimiento>
-      </paciente>
-   </pacientes>
-</ListWrapper>

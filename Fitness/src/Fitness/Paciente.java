@@ -10,6 +10,9 @@ import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
 import Fitness.Fecha;
+
+import java.util.ArrayList;
+
 /**
  *
  * @author will
@@ -20,10 +23,10 @@ public class Paciente {
 
     public Paciente()
     {
-        
+        this.medida = new ArrayList<>();
     }
     
-    public Paciente(String nombre, char sexo, String email, String telefono, String cedula, Medida medida, Fecha fechadenacimiento) {
+    public Paciente(String nombre, char sexo, String email, String telefono, String cedula, ArrayList<Medida> medida, Fecha fechadenacimiento) {
         this.nombre = nombre;
         this.sexo = sexo;
         this.email = email;
@@ -31,6 +34,7 @@ public class Paciente {
         this.cedula = cedula;
         this.medida = medida;
         this.fechadenacimiento = fechadenacimiento;
+        this.medida = new ArrayList<>();
     }
     
     @Element(required=false)
@@ -50,7 +54,7 @@ public class Paciente {
     private String cedula;
     
     @Element(required=false)
-    private Medida medida;
+    private ArrayList<Medida> medida;
     
     @Element(required=false)
     private Fecha fechadenacimiento = new Fecha();
@@ -128,19 +132,7 @@ public class Paciente {
         this.cedula = cedula;
     }
 
-    /**
-     * @return the medida
-     */
-    public Medida getMedida() {
-        return medida;
-    }
-
-    /**
-     * @param medida the medida to set
-     */
-    public void setMedida(Medida medida) {
-        this.medida = medida;
-    }
+    
     /**
      * @param fechadenacimiento the fechadenacimiento to set
      */
@@ -161,5 +153,30 @@ public class Paciente {
     }
     public String getAnioFechadeNacimiento(){
         return fechadenacimiento.getAnio();
+    }
+
+    public ArrayList<Medida> getMedida() {
+        return medida;
+    }
+
+    public void setMedida(ArrayList<Medida> medida) {
+        this.medida = medida;
+    }
+    public void agregarMedida(Medida medida){
+        this.medida.add(medida);
+    }
+    public void borrarMedida(int pos){
+        this.medida.remove(pos);
+    }
+    public int getSizeMedidas(){
+        return medida.size();
+    }
+
+    public Fecha getFechadenacimiento() {
+        return fechadenacimiento;
+    }
+
+    public void setFechadenacimiento(Fecha fechadenacimiento) {
+        this.fechadenacimiento = fechadenacimiento;
     }
 }

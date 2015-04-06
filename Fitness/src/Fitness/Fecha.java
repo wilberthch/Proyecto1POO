@@ -5,15 +5,59 @@
  */
 package Fitness;
 
+import java.time.LocalDate;
+import java.util.Objects;
+
 /**
  *
  * @author admin
  */
 public class Fecha {
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 97 * hash + Objects.hashCode(this.Anio);
+        hash = 97 * hash + Objects.hashCode(this.Mes);
+        hash = 97 * hash + Objects.hashCode(this.Dia);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Fecha other = (Fecha) obj;
+        if (!Objects.equals(this.Anio, other.Anio)) {
+            return false;
+        }
+        if (!Objects.equals(this.Mes, other.Mes)) {
+            return false;
+        }
+        if (!Objects.equals(this.Dia, other.Dia)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return Anio+"-"+Mes+"-"+Dia;
+    }
     
     public Fecha(){
         
     }
+    public Fecha(LocalDate pFecha){
+        Anio = Integer.toString(pFecha.getYear());
+        Mes = Integer.toString(pFecha.getMonthValue());
+        Dia = Integer.toString(pFecha.getDayOfMonth());
+    }
+    
     public Fecha(String pDia, String pMes, String pAnio){
         Anio = pAnio;
         Mes = pMes;
