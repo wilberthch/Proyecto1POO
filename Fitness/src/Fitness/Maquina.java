@@ -12,14 +12,41 @@ package Fitness;
 public class Maquina {
     
     private String descripcion;
-    private int numMaquina;
+    private final long numMaquina;
     
-    private static int canMaquinas;
-    
-    public Maquina()
-    {
-        
+    private static long canMaquinas;
+
+    public Maquina() {
         numMaquina = ++canMaquinas;
     }
+    
+    
+    
+    public Maquina(String pDescripcion)
+    {
+        descripcion = pDescripcion;
+        numMaquina = ++canMaquinas;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public long getNumMaquina() {
+        return numMaquina;
+    }
+    
+    @Override
+    public String toString() {
+        return descripcion;
+    }
+    
+    
     
 }

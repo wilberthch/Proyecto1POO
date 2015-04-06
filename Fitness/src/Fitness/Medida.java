@@ -37,6 +37,8 @@ public class Medida {
     private int frecuenciaCardiacaReposo;
     private double presionArterialSistolica;
     private double presionArterialDiastolica;
+    
+    private Fecha fechaMedicion;
 
     
     
@@ -270,5 +272,13 @@ public class Medida {
     public int calcFrecuenciaCard(int pEdad){
         int res = 220 - pEdad;
         return res;
+    }
+
+    public Fecha getFechaMedicion() {
+        return fechaMedicion;
+    }
+
+    public void setFechaMedicion(Fecha fechaMedicion) {
+        this.fechaMedicion = fechaMedicion;
     }
 }

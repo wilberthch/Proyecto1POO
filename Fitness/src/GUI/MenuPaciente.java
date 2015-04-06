@@ -34,8 +34,8 @@ public class MenuPaciente extends javax.swing.JFrame {
     public static List<Paciente> pacientes = new ArrayList<>();
     public static int numeroPacientes = 0;
     public static Paciente temp;
-    public static int posPaciente;
-    public static Medida medicion;
+    public static int posPaciente = 0;
+
     public MenuPaciente() {
         initComponents();
         
@@ -73,6 +73,7 @@ public class MenuPaciente extends javax.swing.JFrame {
         Medicion = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         Salir = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -193,6 +194,13 @@ public class MenuPaciente extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -217,15 +225,19 @@ public class MenuPaciente extends javax.swing.JFrame {
                                             .addComponent(jLabel6))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(Dia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(Mes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(Anio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(sexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(sexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jButton1))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                            .addComponent(Dia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(Mes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(Anio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -272,10 +284,11 @@ public class MenuPaciente extends javax.swing.JFrame {
                             .addComponent(Mes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(Anio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6))
-                        .addGap(19, 19, 19)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(sexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5))
+                            .addComponent(jLabel5)
+                            .addComponent(jButton1))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(telefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -368,7 +381,7 @@ public class MenuPaciente extends javax.swing.JFrame {
         
         pacientes.add(numeroPacientes,paciente);
         numeroPacientes++;
-        temp = pacientes.get(numeroPacientes-1);
+        posPaciente=(numeroPacientes-1);
         
         /**
         Paciente paciente1 = new Paciente();
@@ -413,7 +426,7 @@ public class MenuPaciente extends javax.swing.JFrame {
             String[] columnasNombres = {"Pacientes", "Cedula"};
             
             
-            PacientesTableModel model = new PacientesTableModel();
+            NonEditableTableModel model = new NonEditableTableModel();
             model.setDataVector(elementos, columnasNombres);
             jTable1.setModel(model);
             
@@ -422,6 +435,7 @@ public class MenuPaciente extends javax.swing.JFrame {
         } catch (Exception ex) {
             Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
         }
+        JOptionPane.showMessageDialog(this, "Paciente creado! Por favor agregar las medidas");
     }//GEN-LAST:event_crearActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
@@ -545,7 +559,7 @@ public class MenuPaciente extends javax.swing.JFrame {
             String[] columnasNombres = {"Pacientes", "Cedula"};
             
             
-            PacientesTableModel model = new PacientesTableModel();
+            NonEditableTableModel model = new NonEditableTableModel();
             model.setDataVector(elementos, columnasNombres);
             jTable1.setModel(model);
             
@@ -561,8 +575,10 @@ public class MenuPaciente extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "No hay pacientes");
             return;
         }
-        
+       
         MenuMedidas menuMedidas = new MenuMedidas();
+        Medida medicion = new Medida();
+                                     
         boolean menu = true;
         menuMedidas.setVisible(menu);
         menu = menuMedidas.getAceptar();
@@ -571,33 +587,33 @@ public class MenuPaciente extends javax.swing.JFrame {
                 return;
             }
         }
-        if (menuMedidas.isVisible() == false){
-            String pEstatura = menuMedidas.getEstatura();
-            String pPeso = menuMedidas.getPeso();
-            String pTriceps = menuMedidas.getTriceps();
-            String pSubescapular = menuMedidas.getSubescapular();
-            String pAbdomen = menuMedidas.getAbdomen();
-            String pIliaco = menuMedidas.getIliaco();
-            String pMuslo = menuMedidas.getMuslo();
-            String pPantorrilla = menuMedidas.getPantorrilla();
-            String pPectoral = menuMedidas.getPectoral();
-            String pCuello = menuMedidas.getCuello();
-            String pBicepDer =menuMedidas.getBicepDer();
-            String pBicepIzq = menuMedidas.getBicepIzq();
-            String pPectoralCircum =menuMedidas.getPectoralCircum();
-            String pEspalda =menuMedidas.getEspalda();
-            String pCintura1 =menuMedidas.getCintura1();
-            String pCintura2 =menuMedidas.getCintura2();
-            String pCintura3 =menuMedidas.getCintura3();
-            String pCadera =menuMedidas.getCadera();
-            String pMusloDer =menuMedidas.getMusloDer();
-            String pMusloIzq =menuMedidas.getMusloIzq();
-            String pPantorrillaDer =menuMedidas.getPantorrillaDer();
-            String pPantorrillaIzq =menuMedidas.getPantorrillaIzq();
-            String pFrecuenciaCardReposo =menuMedidas.getFrecuenciaReposo();
-            String pPresionArtSist =menuMedidas.getPresionArtSist();
-            String pPresionArtDiast =menuMedidas.getPresionArtDiast();
-            
+        String pEstatura = menuMedidas.Estatura.getText();
+        String pPeso = menuMedidas.Peso.getText();
+        String pTriceps = menuMedidas.Triceps.getText();
+        String pSubescapular = menuMedidas.Subescapular.getText();
+        String pAbdomen = menuMedidas.Abdomen.getText();
+        String pIliaco = menuMedidas.Iliaco.getText();
+        String pMuslo = menuMedidas.Muslo.getText();
+        String pPantorrilla = menuMedidas.Pantorrilla.getText();
+        String pPectoral = menuMedidas.Pectoral.getText();
+        String pCuello = menuMedidas.Cuello.getText();
+        String pBicepDer =menuMedidas.BicepDer.getText();
+        String pBicepIzq = menuMedidas.BicepIzq.getText();
+        String pPectoralCircum =menuMedidas.PectoralCircum.getText();
+        String pEspalda =menuMedidas.Espalda.getText();
+        String pCintura1 =menuMedidas.Cintura1.getText();
+        String pCintura2 =menuMedidas.Cintura2.getText();
+        String pCintura3 =menuMedidas.Cintura3.getText();
+        String pCadera =menuMedidas.Cadera.getText();
+        String pMusloDer =menuMedidas.MusloDer.getText();
+        String pMusloIzq =menuMedidas.MusloIzq.getText();
+        String pPantorrillaDer =menuMedidas.PantorrillaDer.getText();
+        String pPantorrillaIzq =menuMedidas.PantorrillaIzq.getText();
+        String pFrecuenciaCardReposo =menuMedidas.FrecuenciaReposo.getText();
+        String pPresionArtSist =menuMedidas.PresionArtSist.getText();
+        String pPresionArtDiast =menuMedidas.PresionArtDiast.getText();
+        
+        
             medicion.setEstatura(Double.parseDouble(pEstatura));
             medicion.setPeso(Double.parseDouble(pPeso));
             medicion.setTriceps(Double.parseDouble(pTriceps));
@@ -623,8 +639,8 @@ public class MenuPaciente extends javax.swing.JFrame {
             medicion.setFrecuenciaCardiacaReposo(Integer.valueOf(pFrecuenciaCardReposo));
             medicion.setPresionArterialSistolica(Double.parseDouble(pPresionArtSist));
             medicion.setPresionArterialDiastolica(Double.parseDouble(pPresionArtDiast));        
-            temp.setMedida(medicion);
-        }
+            pacientes.get(posPaciente).setMedida(medicion);
+        
         
         
         
@@ -633,6 +649,12 @@ public class MenuPaciente extends javax.swing.JFrame {
     private void SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalirActionPerformed
         setVisible(false);
     }//GEN-LAST:event_SalirActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Medida l = pacientes.get(posPaciente).getMedida();
+        String p = Double.toString(l.getEstatura());
+        JOptionPane.showMessageDialog(this, "Su estatura es"+p);
+    }//GEN-LAST:event_jButton1ActionPerformed
     
     
     
@@ -686,6 +708,7 @@ public class MenuPaciente extends javax.swing.JFrame {
     private javax.swing.JTextField cedula;
     private javax.swing.JButton crear;
     private javax.swing.JTextField email;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
