@@ -433,84 +433,7 @@ public class MenuMedidas extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    public String getEstatura(){
-        return (String) Estatura.getText();
-    }
-    public String getPeso(){
-        return (String) Peso.getText();
-    }
-    public String getTriceps(){
-        return (String) Triceps.getText();
-    }
-    public String getSubescapular(){
-        return (String) Subescapular.getText();
-    }
-    public String getAbdomen(){
-        return (String) Abdomen.getText();
-    }
-    public String getIliaco(){
-        return (String) Iliaco.getText();
-    }
-    public String getMuslo(){
-        return (String) Muslo.getText();
-    }
-    public String getPantorrilla(){
-        return (String) Pantorrilla.getText();
-    }
-    public String getPectoral(){
-        return (String) Pectoral.getText();
-    }
-    public String getCuello(){
-        return (String) Cuello.getText();
-    }
-    public String getBicepDer(){
-        return (String) BicepDer.getText();
-    }
-    public String getBicepIzq(){
-        return (String) BicepIzq.getText();
-    }
-    public String getPectoralCircum(){
-        return (String) PectoralCircum.getText();
-    }
-    public String getEspalda(){
-        return (String) Espalda.getText();
-    }
-    public String getCintura1(){
-        return (String) Cintura1.getText();
-    
-    }
-    public String getCintura2(){
-        return (String) Cintura2.getText();
-    
-    }
-    public String getCintura3(){
-        return (String) Cintura3.getText();
-    
-    }
-    public String getCadera(){
-        return (String) Cadera.getText();
-    }
-    public String getMusloDer(){
-        return (String) MusloDer.getText();
-    }
-    public String getMusloIzq(){
-        return (String) MusloIzq.getText();
-    }
-    public String getPantorrillaDer(){
-        return (String) PantorrillaDer.getText();
-    }
-    public String getPantorrillaIzq(){
-        return (String) PantorrillaIzq.getText();
-    }
-    public String getFrecuenciaReposo(){
-        return (String) FrecuenciaReposo.getText();
-    }
-    public String getPresionArtSist(){
-        return (String) PresionArtSist.getText();
-    }
-    public String getPresionArtDiast(){
-        return (String) PresionArtDiast.getText();
-    }
+
     public boolean getAceptar(){
         return aceptacion;
     }
@@ -521,57 +444,36 @@ public class MenuMedidas extends javax.swing.JFrame {
     }//GEN-LAST:event_EstaturaActionPerformed
 
     private void aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarActionPerformed
-        String pEstatura = Estatura.getText();
-        String pPeso = Peso.getText();
-        String pTriceps = Triceps.getText();
-        String pSubescapular = Subescapular.getText();
-        String pAbdomen = Abdomen.getText();
-        String pIliaco = Iliaco.getText();
-        String pMuslo = Muslo.getText();
-        String pPantorrilla = Pantorrilla.getText();
-        String pPectoral = Pectoral.getText();
-        String pCuello = Cuello.getText();
-        String pBicepDer =BicepDer.getText();
-        String pBicepIzq = BicepIzq.getText();
-        String pPectoralCircum =PectoralCircum.getText();
-        String pEspalda =Espalda.getText();
-        String pCintura1 =Cintura1.getText();
-        String pCintura2 =Cintura2.getText();
-        String pCintura3 =Cintura3.getText();
-        String pCadera =Cadera.getText();
-        String pMusloDer =MusloDer.getText();
-        String pMusloIzq =MusloIzq.getText();
-        String pPantorrillaDer =PantorrillaDer.getText();
-        String pPantorrillaIzq =PantorrillaIzq.getText();
-        String pFrecuenciaCardReposo =FrecuenciaReposo.getText();
-        String pPresionArtSist =PresionArtSist.getText();
-        String pPresionArtDiast =PresionArtDiast.getText();
+      
         try{
-            Double.parseDouble(pEstatura);
-            Double.parseDouble(pPeso);
-            Double.parseDouble(pTriceps);
-            Double.parseDouble(pSubescapular);
-            Double.parseDouble(pAbdomen);
-            Double.parseDouble(pIliaco);
-            Double.parseDouble(pMuslo);
-            Double.parseDouble(pPantorrilla);
-            Double.parseDouble(pPectoral);
-            Double.parseDouble(pCuello);
-            Double.parseDouble(pBicepDer);
-            Double.parseDouble(pBicepIzq);
-            Double.parseDouble(pPectoralCircum);
-            Double.parseDouble(pEspalda);
-            Double.parseDouble(pCintura1);
-            Double.parseDouble(pCintura2);
-            Double.parseDouble(pCintura3);
-            Double.parseDouble(pCadera);
-            Double.parseDouble(pMusloDer);
-            Double.parseDouble(pMusloIzq);
-            Double.parseDouble(pPantorrillaDer);
-            Double.parseDouble(pPantorrillaIzq);
-            Double.parseDouble(pFrecuenciaCardReposo);
-            Double.parseDouble(pPresionArtSist);
-            Double.parseDouble(pPresionArtDiast);
+            if (Double.parseDouble(Estatura.getText())<=0||
+            Double.parseDouble(Peso.getText())<=0||
+            Double.parseDouble(Triceps.getText())<=0||
+            Double.parseDouble(Subescapular.getText())<=0||
+            Double.parseDouble(Abdomen.getText())<=0||
+            Double.parseDouble(Iliaco.getText())<=0||
+            Double.parseDouble(Muslo.getText())<=0||
+            Double.parseDouble(Pantorrilla.getText())<=0||
+            Double.parseDouble(Pectoral.getText())<=0||
+            Double.parseDouble(Cuello.getText())<=0||
+            Double.parseDouble(BicepDer.getText())<=0||
+            Double.parseDouble(BicepIzq.getText())<=0||
+            Double.parseDouble(PectoralCircum.getText())<=0||
+            Double.parseDouble(Espalda.getText())<=0||
+            Double.parseDouble(Cintura1.getText())<=0||
+            Double.parseDouble(Cintura2.getText())<=0||
+            Double.parseDouble(Cintura3.getText())<=0||
+            Double.parseDouble(Cadera.getText())<=0||
+            Double.parseDouble(MusloDer.getText())<=0||
+            Double.parseDouble(MusloIzq.getText())<=0||
+            Double.parseDouble(PantorrillaDer.getText())<=0||
+            Double.parseDouble(PantorrillaIzq.getText())<=0||
+            Integer.valueOf(FrecuenciaReposo.getText())<=0||
+            Double.parseDouble(PresionArtSist.getText())<=0||
+            Double.parseDouble(PresionArtDiast.getText())<=0){
+                JOptionPane.showMessageDialog(this, "No debe haber cantidades negativas");
+            return;
+            }
             
             
         }catch(NumberFormatException e){
@@ -624,31 +526,31 @@ public class MenuMedidas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField Abdomen;
-    private javax.swing.JTextField BicepDer;
-    private javax.swing.JTextField BicepIzq;
-    private javax.swing.JTextField Cadera;
-    private javax.swing.JTextField Cintura1;
-    private javax.swing.JTextField Cintura2;
-    private javax.swing.JTextField Cintura3;
-    private javax.swing.JTextField Cuello;
-    private javax.swing.JTextField Espalda;
-    private javax.swing.JTextField Estatura;
-    private javax.swing.JTextField FrecuenciaReposo;
-    private javax.swing.JTextField Iliaco;
-    private javax.swing.JTextField Muslo;
-    private javax.swing.JTextField MusloDer;
-    private javax.swing.JTextField MusloIzq;
-    private javax.swing.JTextField Pantorrilla;
-    private javax.swing.JTextField PantorrillaDer;
-    private javax.swing.JTextField PantorrillaIzq;
-    private javax.swing.JTextField Pectoral;
-    private javax.swing.JTextField PectoralCircum;
-    private javax.swing.JTextField Peso;
-    private javax.swing.JTextField PresionArtDiast;
-    private javax.swing.JTextField PresionArtSist;
-    private javax.swing.JTextField Subescapular;
-    private javax.swing.JTextField Triceps;
+    public static javax.swing.JTextField Abdomen;
+    public static javax.swing.JTextField BicepDer;
+    public static javax.swing.JTextField BicepIzq;
+    public static javax.swing.JTextField Cadera;
+    public static javax.swing.JTextField Cintura1;
+    public static javax.swing.JTextField Cintura2;
+    public static javax.swing.JTextField Cintura3;
+    public static javax.swing.JTextField Cuello;
+    public static javax.swing.JTextField Espalda;
+    public static javax.swing.JTextField Estatura;
+    public static javax.swing.JTextField FrecuenciaReposo;
+    public static javax.swing.JTextField Iliaco;
+    public static javax.swing.JTextField Muslo;
+    public static javax.swing.JTextField MusloDer;
+    public static javax.swing.JTextField MusloIzq;
+    public static javax.swing.JTextField Pantorrilla;
+    public static javax.swing.JTextField PantorrillaDer;
+    public static javax.swing.JTextField PantorrillaIzq;
+    public static javax.swing.JTextField Pectoral;
+    public static javax.swing.JTextField PectoralCircum;
+    public static javax.swing.JTextField Peso;
+    public static javax.swing.JTextField PresionArtDiast;
+    public static javax.swing.JTextField PresionArtSist;
+    public static javax.swing.JTextField Subescapular;
+    public static javax.swing.JTextField Triceps;
     private javax.swing.JButton aceptar;
     private javax.swing.JButton cancelar;
     private javax.swing.JLabel jLabel1;
