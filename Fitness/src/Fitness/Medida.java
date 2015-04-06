@@ -5,6 +5,8 @@
  */
 package Fitness;
 
+import java.util.Objects;
+
 /**
  *
  * @author will
@@ -37,6 +39,7 @@ public class Medida {
     private int frecuenciaCardiacaReposo;
     private double presionArterialSistolica;
     private double presionArterialDiastolica;
+    private Fecha fechaMedida;
 
     
     
@@ -135,6 +138,28 @@ public class Medida {
 
     public void setPantorrilla(double pantorrilla) {
         this.pantorrilla = pantorrilla;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 71 * hash + Objects.hashCode(this.fechaMedida);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Medida other = (Medida) obj;
+        if (!Objects.equals(this.fechaMedida, other.fechaMedida)) {
+            return false;
+        }
+        return true;
     }
 
     public double getPectoral() {
@@ -270,5 +295,13 @@ public class Medida {
     public int calcFrecuenciaCard(int pEdad){
         int res = 220 - pEdad;
         return res;
+    }
+
+    public Fecha getFechaMedida() {
+        return fechaMedida;
+    }
+
+    public void setFechaMedida(Fecha fechaMedida) {
+        this.fechaMedida = fechaMedida;
     }
 }

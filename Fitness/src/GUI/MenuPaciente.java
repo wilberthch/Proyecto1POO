@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import Fitness.Fecha;
 import Fitness.Medida;
 import Fitness.Paciente;
 import Fitness.PersistenciaDatos;
@@ -35,6 +36,8 @@ public class MenuPaciente extends javax.swing.JFrame {
     public static int numeroPacientes = 0;
     public static Paciente temp;
     public static int posPaciente = 0;
+    public static char gener;
+    public static int eda;
 
     public MenuPaciente() {
         initComponents();
@@ -73,8 +76,6 @@ public class MenuPaciente extends javax.swing.JFrame {
         Medicion = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         Salir = new javax.swing.JButton();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -219,14 +220,13 @@ public class MenuPaciente extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(sexo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                            .addComponent(Dia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(Mes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(Anio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(sexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(Dia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(Mes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(Anio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -345,8 +345,10 @@ public class MenuPaciente extends javax.swing.JFrame {
         }
         if ("Hombre".equals(pSexo)){
             genero = 'M';
+            gener = 'M';
         } else {
             genero = 'F';
+            gener = 'F';
         }
         
         Paciente paciente = new Paciente();
@@ -356,6 +358,8 @@ public class MenuPaciente extends javax.swing.JFrame {
         paciente.setSexo(genero);
         paciente.setEmail(pEmail);
         paciente.setFechadeNacimiento(pDia, pMes, pAnio);
+        int anio = 2015 - Integer.valueOf(paciente.getAnioFechadeNacimiento());
+        eda = anio;
         int cantPaciente = numeroPacientes-1;
         
         
@@ -394,27 +398,28 @@ public class MenuPaciente extends javax.swing.JFrame {
         pacientes.add(1,paciente2);
         pacientes.add(2,paciente3);
         **/
-        PersistenciaDatos persistente = new PersistenciaDatos("trabajo");
+        /**PersistenciaDatos persistente = new PersistenciaDatos("trabajo");
         ListWrapper contenedor = new ListWrapper(pacientes);
+        * **/
         String[][] elementos = new String[numeroPacientes][2];
         try {
-            persistente.guardar((Object)contenedor);
+            //persistente.guardar((Object)contenedor);
             //persistente.guardar((Object)"1");
-            ListWrapper NewPacientes = persistente.restaurarObjecto(ListWrapper.class);
-            String hola = persistente.restaurarObjecto(String.class);
+            //ListWrapper NewPacientes = persistente.restaurarObjecto(ListWrapper.class);
+            //String hola = persistente.restaurarObjecto(String.class);
             
             
-            List<Paciente> prueba = NewPacientes.getPacientes();
-            for(int index = 0; index < prueba.size(); index++)
+            //List<Paciente> prueba = NewPacientes.getPacientes();
+            for(int index = 0; index < pacientes.size(); index++)
             {
-                elementos[index][0] = prueba.get(index).getNombre();
-                elementos[index][1] = prueba.get(index).getCedula();
+                elementos[index][0] = pacientes.get(index).getNombre();
+                elementos[index][1] = pacientes.get(index).getCedula();
                 
             }
             String[] columnasNombres = {"Pacientes", "Cedula"};
             
             
-            PacientesTableModel model = new PacientesTableModel();
+            NonEditableTableModel model = new NonEditableTableModel();
             model.setDataVector(elementos, columnasNombres);
             jTable1.setModel(model);
             
@@ -440,16 +445,18 @@ public class MenuPaciente extends javax.swing.JFrame {
         int genero = 0;
         char tempo = temp.getSexo();
         if (tempo=='M'){
+            gener = 'M';
             genero = 1;
         }
         if (tempo=='F'){
+            gener = 'F';
             genero = 2;
         }
         sexo.setSelectedIndex(genero);
         int dia = Integer.valueOf(temp.getDiaFechadeNacimiento())-1;
         int mes = Integer.valueOf(temp.getMesFechadeNacimiento())-1;
         int anio = 2015 - Integer.valueOf(temp.getAnioFechadeNacimiento());
-        
+        eda = anio;
         Dia.setSelectedIndex(dia);
         Mes.setSelectedIndex(mes);
         Anio.setSelectedIndex(anio);
@@ -547,7 +554,7 @@ public class MenuPaciente extends javax.swing.JFrame {
             String[] columnasNombres = {"Pacientes", "Cedula"};
             
             
-            PacientesTableModel model = new PacientesTableModel();
+            NonEditableTableModel model = new NonEditableTableModel();
             model.setDataVector(elementos, columnasNombres);
             jTable1.setModel(model);
             
@@ -564,8 +571,9 @@ public class MenuPaciente extends javax.swing.JFrame {
             return;
         }
         MenuMedidas menuMedidas = new MenuMedidas();
-        if (pacientes.get(posPaciente).getMedida()!=null){
-            Medida tempMedida = pacientes.get(posPaciente).getMedida();
+        /**if (!pacientes.get(posPaciente).getMedida().isEmpty()){
+            ArrayList<Medida> listMedida = pacientes.get(posPaciente).getMedida();
+            Medida tempMedida = listMedida.get(0);
             
             menuMedidas.Estatura.setText(Double.toString(tempMedida.getEstatura()));
             menuMedidas.Peso.setText(Double.toString(tempMedida.getPeso()));
@@ -593,8 +601,23 @@ public class MenuPaciente extends javax.swing.JFrame {
             menuMedidas.PresionArtSist.setText(Double.toString(tempMedida.getPresionArterialSistolica()));
             menuMedidas.PresionArtDiast.setText(Double.toString(tempMedida.getPresionArterialDiastolica()));
             
+            double porcGrasaCorp=tempMedida.calcPorcentajeGrasaCorporal(eda,gener);
+            String porcGrasaCorpString = String.format("%.2f", porcGrasaCorp);
+            menuMedidas.porcentajeGrasaCorp.setText(porcGrasaCorpString+"%");  
+
+            double porcMasaMusc=tempMedida.calcPorcentajeMasaMuscular();
+            String porcMasaMuscString=String.format("%.2f", porcMasaMusc);
+            menuMedidas.MasaMusc.setText(porcMasaMuscString+"%");
+
+            double cintura_cadera=tempMedida.calcRelacionCinturaCadera();
+            String porcCintura_caderaString=String.format("%.5f",cintura_cadera);
+            menuMedidas.CintCad.setText(porcCintura_caderaString);
+
+            int frequenciaCard=tempMedida.calcFrecuenciaCard(eda);
+            menuMedidas.FreqCard.setText(Integer.toString(frequenciaCard)+"/min");
             
-        }
+            
+        }**/
         menuMedidas.setVisible(true);
         
         

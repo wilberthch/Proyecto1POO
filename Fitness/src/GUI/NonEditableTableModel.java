@@ -10,7 +10,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author will
  */
-public class PacientesTableModel extends DefaultTableModel{
+public class NonEditableTableModel extends DefaultTableModel{
 
     
     
