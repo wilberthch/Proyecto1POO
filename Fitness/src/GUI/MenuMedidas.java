@@ -7,6 +7,9 @@ package GUI;
 
 import Fitness.Medida;
 import Fitness.Paciente;
+import static GUI.MenuPaciente.numeroPacientes;
+import static GUI.MenuPaciente.pacientes;
+import static GUI.MenuPaciente.posPaciente;
 
 import javax.swing.JOptionPane;
 
@@ -17,7 +20,7 @@ import javax.swing.JOptionPane;
  * @author admin
  */
 public class MenuMedidas extends javax.swing.JFrame {
-    boolean aceptacion = true;
+    
     /**
      * Creates new form MenuMedidas
      */
@@ -434,9 +437,7 @@ public class MenuMedidas extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public boolean getAceptar(){
-        return aceptacion;
-    }
+    
     
     
     private void EstaturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EstaturaActionPerformed
@@ -444,7 +445,7 @@ public class MenuMedidas extends javax.swing.JFrame {
     }//GEN-LAST:event_EstaturaActionPerformed
 
     private void aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarActionPerformed
-      
+        
         try{
             if (Double.parseDouble(Estatura.getText())<=0||
             Double.parseDouble(Peso.getText())<=0||
@@ -480,13 +481,40 @@ public class MenuMedidas extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Una o mas de las opciones no son validas, por favor revisar");
             return;
         }
-        
+        Medida medicion = new Medida();
+         
+        medicion.setEstatura(Double.parseDouble(Estatura.getText()));
+        medicion.setPeso(Double.parseDouble(Peso.getText()));
+        medicion.setTriceps(Double.parseDouble(Triceps.getText()));
+        medicion.setSubescapular(Double.parseDouble(Subescapular.getText()));
+        medicion.setAbdomen(Double.parseDouble(Abdomen.getText()));
+        medicion.setIliaco(Double.parseDouble(Iliaco.getText()));
+        medicion.setMuslo(Double.parseDouble(Muslo.getText()));
+        medicion.setPantorrilla(Double.parseDouble(Pantorrilla.getText()));
+        medicion.setPectoral(Double.parseDouble(Pectoral.getText()));
+        medicion.setCuello(Double.parseDouble(Cuello.getText()));
+        medicion.setBicepDer(Double.parseDouble(BicepDer.getText()));
+        medicion.setBicepIzq(Double.parseDouble(BicepIzq.getText()));
+        medicion.setPectoralCircum(Double.parseDouble(PectoralCircum.getText()));
+        medicion.setEspalda(Double.parseDouble(Espalda.getText()));
+        medicion.setCintura1(Double.parseDouble(Cintura1.getText()));
+        medicion.setCintura2(Double.parseDouble(Cintura2.getText()));
+        medicion.setCintura3(Double.parseDouble(Cintura3.getText()));
+        medicion.setCadera(Double.parseDouble(Cadera.getText()));
+        medicion.setMusloDerecho(Double.parseDouble(MusloDer.getText()));
+        medicion.setMusloIzquierdo(Double.parseDouble(MusloIzq.getText()));
+        medicion.setPantorrillaDerecha(Double.parseDouble(PantorrillaDer.getText()));
+        medicion.setPantorrillaIzquierda(Double.parseDouble(PantorrillaIzq.getText()));
+        medicion.setFrecuenciaCardiacaReposo(Integer.valueOf(FrecuenciaReposo.getText()));
+        medicion.setPresionArterialSistolica(Double.parseDouble(PresionArtSist.getText()));
+        medicion.setPresionArterialDiastolica(Double.parseDouble(PresionArtDiast.getText()));        
+        pacientes.get(posPaciente).setMedida(medicion);
         
         setVisible(false);
     }//GEN-LAST:event_aceptarActionPerformed
 
     private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
-        aceptacion = false;
+
         setVisible(false);
     }//GEN-LAST:event_cancelarActionPerformed
 

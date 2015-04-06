@@ -1,10 +1,48 @@
 <ListWrapper>
    <pacientes class="java.util.ArrayList">
-      <paciente cedula="1">
-         <nombre>w</nombre>
+      <paciente cedula="32">
+         <nombre>rw</nombre>
          <sexo>M</sexo>
          <email>@.com</email>
-         <telefono>1</telefono>
+         <telefono>2</telefono>
+         <medida>
+            <estatura>12.0</estatura>
+            <peso>12.0</peso>
+            <triceps>31.0</triceps>
+            <subescapular>321.0</subescapular>
+            <abdomen>32.0</abdomen>
+            <iliaco>121.0</iliaco>
+            <muslo>321.0</muslo>
+            <pantorrilla>123.0</pantorrilla>
+            <cuello>1.0</cuello>
+            <bicepDer>2.0</bicepDer>
+            <bicepIzq>123.0</bicepIzq>
+            <pectoral>12.0</pectoral>
+            <pectoralCircum>23.0</pectoralCircum>
+            <espalda>132.0</espalda>
+            <cintura1>323.0</cintura1>
+            <cintura2>12.0</cintura2>
+            <cintura3>1.0</cintura3>
+            <cadera>1.0</cadera>
+            <musloDerecho>32.0</musloDerecho>
+            <musloIzquierdo>12.0</musloIzquierdo>
+            <pantorrillaDerecha>2.0</pantorrillaDerecha>
+            <pantorrillaIzquierda>32.0</pantorrillaIzquierda>
+            <frecuenciaCardiacaReposo>213</frecuenciaCardiacaReposo>
+            <presionArterialSistolica>2.0</presionArterialSistolica>
+            <presionArterialDiastolica>1.0</presionArterialDiastolica>
+         </medida>
+         <fechadenacimiento>
+            <Anio>2015</Anio>
+            <Mes>1</Mes>
+            <Dia>1</Dia>
+         </fechadenacimiento>
+      </paciente>
+      <paciente cedula="34">
+         <nombre>re</nombre>
+         <sexo>M</sexo>
+         <email>@.com</email>
+         <telefono>2</telefono>
          <fechadenacimiento>
             <Anio>2015</Anio>
             <Mes>1</Mes>
