@@ -9,6 +9,7 @@ import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author will
+ * 
  */
 public class NonEditableTableModel extends DefaultTableModel{
 

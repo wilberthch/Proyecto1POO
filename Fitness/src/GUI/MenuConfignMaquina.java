@@ -13,6 +13,7 @@ import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author will
+ * 
  */
 public class MenuConfignMaquina extends javax.swing.JFrame {
     

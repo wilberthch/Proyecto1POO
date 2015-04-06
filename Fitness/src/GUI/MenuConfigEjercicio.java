@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 /**
  *
  * @author will
+ * 
  */
 public class MenuConfigEjercicio extends javax.swing.JFrame {
 
