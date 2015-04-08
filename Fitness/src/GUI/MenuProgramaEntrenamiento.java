@@ -433,7 +433,7 @@ public class MenuProgramaEntrenamiento extends javax.swing.JFrame {
     private void btn_BorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_BorrarActionPerformed
         
         pacienteActual.eliminarProgramaEntrenamiento(proEntrenamientoActual);
-        
+        refreshTblProEntrenamiento();
         cleanForm();
     }//GEN-LAST:event_btn_BorrarActionPerformed
 

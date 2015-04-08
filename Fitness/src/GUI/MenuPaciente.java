@@ -38,6 +38,8 @@ public class MenuPaciente extends javax.swing.JFrame {
     public static int posPaciente = 0;
     public static char gener;
     public static int eda;
+    private static final NonEditableTableModel pacienteTableModel = new NonEditableTableModel();
+    private static final String[] pacienteHeaders = {"Pacientes","Cedula"};
 
     public MenuPaciente() {
         initComponents();
@@ -306,7 +308,23 @@ public class MenuPaciente extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    public void refreshPacienteTab()
+    {
+        
+        
+        String[][] pacienteDatos = new String[pacientes.size()][2];
+        for(int index = 0; index < pacientes.size(); index++)
+        {
+            
+            pacienteDatos[index][0]= pacientes.get(index).getNombre();
+            pacienteDatos[index][1] = pacientes.get(index).getCedula();
+        }
+        
+        pacienteTableModel.setDataVector(pacienteDatos, pacienteHeaders);
+        jTable1.setModel(pacienteTableModel);
+        
+    }
     private void crearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearActionPerformed
         String pNombre = nombre.getText();
         if (pNombre.matches(".*\\d.*")){
@@ -320,11 +338,21 @@ public class MenuPaciente extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "La cedula no debe haber letras");
             return;
         }
+        long tempCed = Long.valueOf(pCedula);
+        if(tempCed < 9999999){
+            JOptionPane.showMessageDialog(this, "La cedula no es valida");
+            return;
+        }
         
         String pTelefono = telefono.getText();
         if (pTelefono.matches("[0-9]+")){
         } else {
             JOptionPane.showMessageDialog(this, "El numero de telefono no debe haber letras");
+            return;
+        }
+        long tempCel = Long.valueOf(pTelefono);
+        if (tempCel < 9999999){
+            JOptionPane.showMessageDialog(this, "No es un numero de telefono valido");
             return;
         }
         
@@ -357,6 +385,8 @@ public class MenuPaciente extends javax.swing.JFrame {
             gener = 'F';
         }
         
+        
+        
         Paciente paciente = new Paciente();
         paciente.setNombre(pNombre);
         paciente.setCedula(pCedula);
@@ -380,60 +410,8 @@ public class MenuPaciente extends javax.swing.JFrame {
         pacientes.add(numeroPacientes,paciente);
         numeroPacientes++;
         posPaciente=(numeroPacientes-1);
+        refreshPacienteTab();
         
-        /**
-        Paciente paciente1 = new Paciente();
-        paciente1.setNombre("Will");
-        paciente1.setCedula("dsfdsf");
-        paciente1.setEmail(null);
-        paciente1.setSexo('M');
-        paciente1.setTelefono(null);
-        Paciente paciente2 = new Paciente();
-        paciente2.setNombre("Edwin");
-        paciente2.setCedula("3456");
-        paciente2.setEmail(null);
-        paciente2.setSexo('M');
-        paciente2.setTelefono(null);
-        Paciente paciente3 = new Paciente();
-        paciente3.setNombre("Sha");
-        paciente3.setCedula("1334");
-        paciente3.setEmail(null);
-        paciente3.setSexo('M');
-        paciente3.setTelefono(null);
-        pacientes.add(0,paciente1);
-        pacientes.add(1,paciente2);
-        pacientes.add(2,paciente3);
-        **/
-        /**PersistenciaDatos persistente = new PersistenciaDatos("trabajo");
-        ListWrapper contenedor = new ListWrapper(pacientes);
-        * **/
-        String[][] elementos = new String[numeroPacientes][2];
-        try {
-            //persistente.guardar((Object)contenedor);
-            //persistente.guardar((Object)"1");
-            //ListWrapper NewPacientes = persistente.restaurarObjecto(ListWrapper.class);
-            //String hola = persistente.restaurarObjecto(String.class);
-            
-            
-            //List<Paciente> prueba = NewPacientes.getPacientes();
-            for(int index = 0; index < pacientes.size(); index++)
-            {
-                elementos[index][0] = pacientes.get(index).getNombre();
-                elementos[index][1] = pacientes.get(index).getCedula();
-                
-            }
-            String[] columnasNombres = {"Pacientes", "Cedula"};
-            
-            
-            NonEditableTableModel model = new NonEditableTableModel();
-            model.setDataVector(elementos, columnasNombres);
-            jTable1.setModel(model);
-            
-            
-            
-        } catch (Exception ex) {
-            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
-        }
         JOptionPane.showMessageDialog(this, "Paciente creado! Por favor agregar las medidas");
     }//GEN-LAST:event_crearActionPerformed
 
@@ -540,35 +518,9 @@ public class MenuPaciente extends javax.swing.JFrame {
         }
         pacientes.remove(posPaciente);
         numeroPacientes--;
-        ListWrapper contenedor = new ListWrapper(pacientes);
-        String[][] elementos = new String[ numeroPacientes][2];
-        PersistenciaDatos persistente = new PersistenciaDatos("trabajo");
-        try {
-            persistente.guardar((Object)contenedor);
-            //persistente.guardar((Object)"1");
-            ListWrapper NewPacientes = persistente.restaurarObjecto(ListWrapper.class);
-            String hola = persistente.restaurarObjecto(String.class);
-            
-            
-            List<Paciente> prueba = NewPacientes.getPacientes();
-            for(int index = 0; index < prueba.size(); index++)
-            {
-                elementos[index][0] = prueba.get(index).getNombre();
-                elementos[index][1] = prueba.get(index).getCedula();
-                
-            }
-            String[] columnasNombres = {"Pacientes", "Cedula"};
-            
-            
-            NonEditableTableModel model = new NonEditableTableModel();
-            model.setDataVector(elementos, columnasNombres);
-            jTable1.setModel(model);
-            
-            
-            
-        } catch (Exception ex) {
-            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        refreshPacienteTab();
+        JOptionPane.showMessageDialog(this, "El paciente se borro exitosamente");
+        
     }//GEN-LAST:event_borrarActionPerformed
 
     private void MedicionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MedicionActionPerformed
