@@ -111,6 +111,7 @@ public class MenuPaciente extends javax.swing.JFrame {
 
         jLabel6.setText("Fecha de nacimiento");
 
+        nombre.setNextFocusableComponent(cedula);
         nombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nombreActionPerformed(evt);
@@ -186,6 +187,11 @@ public class MenuPaciente extends javax.swing.JFrame {
         });
 
         jButton2.setText("Programa de entrenamiento");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         Salir.setText("Salir");
         Salir.addActionListener(new java.awt.event.ActionListener() {
@@ -628,6 +634,23 @@ public class MenuPaciente extends javax.swing.JFrame {
     private void SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalirActionPerformed
         setVisible(false);
     }//GEN-LAST:event_SalirActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        
+        try
+        {
+            MenuProgramaEntrenamiento proEntrenamientoFrame = new MenuProgramaEntrenamiento(temp);
+        
+            proEntrenamientoFrame.setVisible(true);
+        }
+        catch(NullPointerException ex)
+        {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+
+        
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
     
     
     

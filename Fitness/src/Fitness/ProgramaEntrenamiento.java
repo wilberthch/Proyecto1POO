@@ -14,18 +14,24 @@ import java.util.ArrayList;
  */
 public class ProgramaEntrenamiento {
     
-    private LocalDate fechaCreacion;
+    private Fecha fechaCreacion;
     private String titulo;
     private String objetivo;
-    private LocalDate fechaInicio;
-    private LocalDate fechaFinal;
+    private Fecha fechaInicio;
+    private Fecha fechaFinal;
     private int controlAsistencia;
     private ArrayList<ArrayList<Ejercicio>> diasEjercicio;
+    
+    public ProgramaEntrenamiento()
+    {
+        fechaCreacion = new Fecha(LocalDate.now());
+        
+    }
 
     /**
      * @return the fechaCreacion
      */
-    public LocalDate getFechaCreacion() {
+    public Fecha getFechaCreacion() {
         return fechaCreacion;
     }
 
@@ -60,28 +66,28 @@ public class ProgramaEntrenamiento {
     /**
      * @return the fechaInicio
      */
-    public LocalDate getFechaInicio() {
+    public Fecha getFechaInicio() {
         return fechaInicio;
     }
 
     /**
      * @param fechaInicio the fechaInicio to set
      */
-    public void setFechaInicio(LocalDate fechaInicio) {
+    public void setFechaInicio(Fecha fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
 
     /**
      * @return the fechaFinal
      */
-    public LocalDate getFechaFinal() {
+    public Fecha getFechaFinal() {
         return fechaFinal;
     }
 
     /**
      * @param fechaFinal the fechaFinal to set
      */
-    public void setFechaFinal(LocalDate fechaFinal) {
+    public void setFechaFinal(Fecha fechaFinal) {
         this.fechaFinal = fechaFinal;
     }
 
@@ -104,6 +110,13 @@ public class ProgramaEntrenamiento {
      */
     public void setDiasEjercicio(ArrayList<ArrayList<Ejercicio>> diasEjercicio) {
         this.diasEjercicio = diasEjercicio;
+    }
+
+    /**
+     * @param controlAsistencia the controlAsistencia to set
+     */
+    public void setControlAsistencia(int controlAsistencia) {
+        this.controlAsistencia = controlAsistencia;
     }
     
     

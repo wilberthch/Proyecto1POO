@@ -24,6 +24,7 @@ public class Paciente {
     public Paciente()
     {
         this.medida = new ArrayList<>();
+        this.programaEntrenamientoList = new ArrayList<>();
     }
     
     public Paciente(String nombre, char sexo, String email, String telefono, String cedula, ArrayList<Medida> medida, Fecha fechadenacimiento) {
@@ -35,6 +36,7 @@ public class Paciente {
         this.medida = medida;
         this.fechadenacimiento = fechadenacimiento;
         this.medida = new ArrayList<>();
+        this.programaEntrenamientoList = new ArrayList<>();
     }
     
     @Element(required=false)
@@ -52,6 +54,9 @@ public class Paciente {
     
     @Attribute(required=false)
     private String cedula;
+    
+    @Element(required = false)
+    private ArrayList<ProgramaEntrenamiento> programaEntrenamientoList;
     
     @Element(required=false)
     private ArrayList<Medida> medida;
@@ -178,5 +183,48 @@ public class Paciente {
 
     public void setFechadenacimiento(Fecha fechadenacimiento) {
         this.fechadenacimiento = fechadenacimiento;
+    }
+
+    public ArrayList<ProgramaEntrenamiento> getProgramaEntrenamientoList() {
+        return programaEntrenamientoList;
+    }
+
+    public void setProgramaEntrenamientoList(ArrayList<ProgramaEntrenamiento> programaEntrenamientoList) {
+        this.programaEntrenamientoList = programaEntrenamientoList;
+    }
+    
+    public void arregarProgramaEntrenamiento(ProgramaEntrenamiento pProgramaEntrenamiento)
+    {
+        programaEntrenamientoList.add(pProgramaEntrenamiento);
+    }
+    
+    public void eliminarProgramaEntrenamiento(int index)
+    {
+        programaEntrenamientoList.remove(index);
+    }
+    
+    public void eliminarProgramaEntrenamiento(ProgramaEntrenamiento pProEntrenamiento)
+    {
+        programaEntrenamientoList.remove(pProEntrenamiento);
+    }
+    
+    public ProgramaEntrenamiento getProgramaEntrenamiento(String pTitulo, Fecha pFechaCreacion) throws NullPointerException
+    {
+        ProgramaEntrenamiento res = null;
+        
+        for(ProgramaEntrenamiento proEntrenamiento : programaEntrenamientoList)
+        {
+            if(proEntrenamiento.getFechaCreacion().equals(pFechaCreacion) && proEntrenamiento.getTitulo().equals(pTitulo))
+            {
+                res = proEntrenamiento;
+            }
+        }
+        
+        if(res == null)
+        {
+            throw new NullPointerException("Programa de Entrenamiento no encontrado");
+        }
+        
+        return res;
     }
 }

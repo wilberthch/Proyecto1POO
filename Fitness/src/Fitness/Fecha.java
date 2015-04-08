@@ -55,7 +55,9 @@ public class Fecha {
     public Fecha(LocalDate pFecha){
         Anio = Integer.toString(pFecha.getYear());
         Mes = Integer.toString(pFecha.getMonthValue());
+        Mes = Mes.length() < 2 ? "0" + Mes : Mes;
         Dia = Integer.toString(pFecha.getDayOfMonth());
+        Dia = Dia.length() < 2 ? "0" + Dia : Dia;
     }
     
     public Fecha(String pDia, String pMes, String pAnio){
@@ -64,6 +66,15 @@ public class Fecha {
         Dia = pDia;
         
     }
+    
+    public Fecha(String pFechaString)
+    {
+        String[] fechaArray = pFechaString.split("-");
+        Anio = fechaArray[0];
+        Mes = fechaArray[1];
+        Dia = fechaArray[2];
+    }
+    
     private String Anio;
     private String Mes;
     private String Dia;
@@ -91,5 +102,17 @@ public class Fecha {
     
     public void setAnio(String Anio) {
         this.Anio = Anio;
+    }
+    
+    public boolean EsFechaMenor(Fecha pFecha)
+    {
+        boolean res = false;
+        
+        LocalDate fechaBase = LocalDate.parse(this.toString());
+        LocalDate fechaAComparar = LocalDate.parse(pFecha.toString());
+        
+        res = fechaBase.isBefore(fechaAComparar);
+        
+        return res;
     }
 }
