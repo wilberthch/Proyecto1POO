@@ -69,8 +69,10 @@ public class MenuConfigEjercicio extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         btn_Guardar = new javax.swing.JButton();
         btn_Borrar = new javax.swing.JButton();
+        btn_Salir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Configuración Ejercicios");
 
         tbl_Ejercicio.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -108,6 +110,13 @@ public class MenuConfigEjercicio extends javax.swing.JFrame {
             }
         });
 
+        btn_Salir.setText("Salir");
+        btn_Salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_SalirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -118,12 +127,15 @@ public class MenuConfigEjercicio extends javax.swing.JFrame {
                     .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tf_Descripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                        .addGap(6, 6, 6)
+                        .addComponent(tf_Descripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(btn_Guardar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_Borrar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btn_Borrar)))
+                        .addComponent(btn_Salir)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -135,6 +147,7 @@ public class MenuConfigEjercicio extends javax.swing.JFrame {
                     .addComponent(btn_Guardar)
                     .addComponent(btn_Borrar)
                     .addComponent(jLabel1)
+                    .addComponent(btn_Salir)
                     .addComponent(tf_Descripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20))
         );
@@ -180,6 +193,10 @@ public class MenuConfigEjercicio extends javax.swing.JFrame {
         
     }//GEN-LAST:event_tbl_EjercicioMouseClicked
 
+    private void btn_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SalirActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_btn_SalirActionPerformed
+
     
     
     /**
@@ -220,6 +237,7 @@ public class MenuConfigEjercicio extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Borrar;
     private javax.swing.JButton btn_Guardar;
+    private javax.swing.JButton btn_Salir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tbl_Ejercicio;

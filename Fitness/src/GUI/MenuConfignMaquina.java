@@ -87,6 +87,7 @@ public class MenuConfignMaquina extends javax.swing.JFrame {
         tf_DescripMaquina = new javax.swing.JTextField();
         btn_Guardar = new javax.swing.JButton();
         btn_Borrar = new javax.swing.JButton();
+        btn_Salir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Configuración Máquina");
@@ -123,21 +124,30 @@ public class MenuConfignMaquina extends javax.swing.JFrame {
             }
         });
 
+        btn_Salir.setText("Salir");
+        btn_Salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_SalirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(86, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 505, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jScrollPane2)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(tf_DescripMaquina, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btn_Guardar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btn_Borrar)))
-                .addGap(101, 101, 101))
+                        .addComponent(btn_Borrar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_Salir)))
+                .addGap(41, 41, 41))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -148,8 +158,9 @@ public class MenuConfignMaquina extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tf_DescripMaquina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_Guardar)
-                    .addComponent(btn_Borrar))
-                .addContainerGap(22, Short.MAX_VALUE))
+                    .addComponent(btn_Borrar)
+                    .addComponent(btn_Salir))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -191,6 +202,10 @@ public class MenuConfignMaquina extends javax.swing.JFrame {
         tf_DescripMaquina.setText(textoDescripcion);
     }//GEN-LAST:event_tbl_MaquinaMouseClicked
 
+    private void btn_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SalirActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_btn_SalirActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -230,6 +245,7 @@ public class MenuConfignMaquina extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Borrar;
     private javax.swing.JButton btn_Guardar;
+    private javax.swing.JButton btn_Salir;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tbl_Maquina;
     private javax.swing.JTextField tf_DescripMaquina;
