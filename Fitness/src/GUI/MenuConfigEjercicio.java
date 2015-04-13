@@ -7,6 +7,8 @@ package GUI;
 
 import Fitness.Ejercicio;
 import Fitness.Maquina;
+import Fitness.Paciente;
+import Fitness.ProgramaEntrenamiento;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -53,6 +55,34 @@ public class MenuConfigEjercicio extends javax.swing.JFrame {
         tbl_Ejercicio.setModel(ejercicioTableModel);
     }
     
+    private void removeEjerciciosFromEverywhere(String pEjercicioDes)
+    {
+        for(int indexPaciente = 0; indexPaciente < MenuPaciente.pacientes.size(); indexPaciente++)
+        {
+            Paciente paciente = MenuPaciente.pacientes.get(indexPaciente);
+            int sizeProEntrenamiento = paciente.getProgramaEntrenamientoList().size();
+            for(int indexProEntrenamiento = 0; indexProEntrenamiento < sizeProEntrenamiento; indexProEntrenamiento++)
+            {
+                ProgramaEntrenamiento proEntrenamiento = 
+                        paciente.getProgramaEntrenamientoList().get(indexProEntrenamiento);
+                
+                for(int indexDia = 0; indexDia < proEntrenamiento.getDiasEjercicio().size(); indexDia++)
+                {
+                    ArrayList<Ejercicio> dia = proEntrenamiento.getDiasEjercicio().get(indexDia);
+                    for(int indexEjercicio = 0; indexEjercicio < dia.size(); indexEjercicio++)
+                    {
+                        Ejercicio ejercicio = dia.get(indexEjercicio);
+                        
+                        if(pEjercicioDes.equals(ejercicio.getDescripcion()))
+                        {
+                            dia.remove(indexDia);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -71,7 +101,6 @@ public class MenuConfigEjercicio extends javax.swing.JFrame {
         btn_Borrar = new javax.swing.JButton();
         btn_Salir = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Configuración Ejercicios");
 
         tbl_Ejercicio.setModel(new javax.swing.table.DefaultTableModel(
@@ -176,12 +205,19 @@ public class MenuConfigEjercicio extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_GuardarActionPerformed
 
     private void btn_BorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_BorrarActionPerformed
-        if(indexTipoEjercicioActual > -1)
+        int res = JOptionPane.showConfirmDialog(this, "El ejercicio que desea borrar puede estar enlazada con programas de entrenamiento, ¿Desea borrar la ejercicio?");
+        if(res == 0)
         {
-            tipoEjercicios.remove(indexTipoEjercicioActual);
+            if(indexTipoEjercicioActual > -1)
+            {
+                String ejercicioBorrar = tipoEjercicios.get(indexTipoEjercicioActual);
+                removeEjerciciosFromEverywhere(ejercicioBorrar);
+                tipoEjercicios.remove(indexTipoEjercicioActual);
+            }
+
+            clearForm();
+            refreshTblEjercicio();
         }
-        clearForm();
-        refreshTblEjercicio();
     }//GEN-LAST:event_btn_BorrarActionPerformed
 
     private void tbl_EjercicioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_EjercicioMouseClicked

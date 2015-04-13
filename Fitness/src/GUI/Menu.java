@@ -47,7 +47,6 @@ public class Menu extends javax.swing.JFrame {
     private void initComponents() {
 
         Pacientes = new javax.swing.JButton();
-        Configuracion = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -68,13 +67,6 @@ public class Menu extends javax.swing.JFrame {
         Pacientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 PacientesActionPerformed(evt);
-            }
-        });
-
-        Configuracion.setText("Configuracion");
-        Configuracion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miComboActionPerformed(evt);
             }
         });
 
@@ -125,20 +117,16 @@ public class Menu extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(95, 95, 95)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(Configuracion, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Pacientes, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(117, Short.MAX_VALUE))
+                .addGap(105, 105, 105)
+                .addComponent(Pacientes, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(107, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(39, 39, 39)
+                .addGap(72, 72, 72)
                 .addComponent(Pacientes, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
-                .addComponent(Configuracion, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(89, Short.MAX_VALUE))
         );
 
         pack();
@@ -152,16 +140,12 @@ public class Menu extends javax.swing.JFrame {
         
     }//GEN-LAST:event_PacientesActionPerformed
 
-    private void miComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miComboActionPerformed
-        
-    }//GEN-LAST:event_miComboActionPerformed
-
     private void mitm_MaquinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mitm_MaquinaActionPerformed
         menuConfignMaquina.setVisible(true);
     }//GEN-LAST:event_mitm_MaquinaActionPerformed
 
     private void mitm_EjercicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mitm_EjercicioActionPerformed
-        menuConfigEjercicio.setVisible(true);
+        menuConfigEjercicio.setVisible(true); 
     }//GEN-LAST:event_mitm_EjercicioActionPerformed
 
     /**
@@ -200,7 +184,6 @@ public class Menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Configuracion;
     private javax.swing.JButton Pacientes;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;

@@ -32,7 +32,7 @@ public class MenuPaciente extends javax.swing.JFrame {
     /**
      * Creates new form MenuPaciente
      */
-    public static List<Paciente> pacientes = new ArrayList<>();
+    public static final List<Paciente> pacientes = new ArrayList<>();
     public static int numeroPacientes = 0;
     public static Paciente temp;
     public static int posPaciente = 0;
@@ -514,12 +514,24 @@ public class MenuPaciente extends javax.swing.JFrame {
 
     private void borrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarActionPerformed
         if (numeroPacientes==0){
+            JOptionPane.showMessageDialog(this, "No existen pacientes para borrar");
+        }
+        int cantM = pacientes.get(posPaciente).getMedida().size();
+        String nomP = pacientes.get(posPaciente).getNombre();
+        int cantPE = pacientes.get(posPaciente).getProgramaEntrenamientoList().size();
+        int respuesta = JOptionPane.showConfirmDialog(this, "Deasea eliminar a " +nomP+" con "+cantM+" mediciones y "+cantPE+ " programas de entrenaientos?");
+        if (respuesta == 0){
+            pacientes.remove(posPaciente);
+            numeroPacientes--;
+            refreshPacienteTab();
+            JOptionPane.showMessageDialog(this, "El paciente se borro exitosamente");
+        }
+        if (respuesta == 1){
             return;
         }
-        pacientes.remove(posPaciente);
-        numeroPacientes--;
-        refreshPacienteTab();
-        JOptionPane.showMessageDialog(this, "El paciente se borro exitosamente");
+        if (respuesta == 2){
+            return;
+        }
         
     }//GEN-LAST:event_borrarActionPerformed
 

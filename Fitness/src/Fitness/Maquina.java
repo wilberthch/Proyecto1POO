@@ -5,6 +5,8 @@
  */
 package Fitness;
 
+import java.util.Objects;
+
 /**
  *
  * @author will
@@ -18,6 +20,32 @@ public class Maquina {
 
     public Maquina() {
         numMaquina = ++canMaquinas;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 13 * hash + Objects.hashCode(this.descripcion);
+        hash = 13 * hash + (int) (this.numMaquina ^ (this.numMaquina >>> 32));
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Maquina other = (Maquina) obj;
+        if (!Objects.equals(this.descripcion, other.descripcion)) {
+            return false;
+        }
+        if (this.numMaquina != other.numMaquina) {
+            return false;
+        }
+        return true;
     }
     
     

@@ -5,11 +5,33 @@
  */
 package GUI;
 
+import Fitness.Ejercicio;
+import Fitness.Fecha;
+import Fitness.Maquina;
+import Fitness.Medida;
+import Fitness.ProgramaEntrenamiento;
+import static GUI.MenuMedidas.MedicionTab;
+import static GUI.MenuPaciente.pacientes;
+import static GUI.MenuPaciente.posPaciente;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author will
  */
 public class MenuEjercicios extends javax.swing.JFrame {
+    
+    private static final NonEditableTableModel ejerciciosTableModel = new NonEditableTableModel();
+    private static final String[] ejerciciosHeaders = {"Num Ejercicio","Descripción"};
+    
+    private ProgramaEntrenamiento programaEntrenamiento;
+    private ArrayList<Ejercicio> ejerciciosActuales;
+    private Ejercicio ejercicioActual;
+    
 
     /**
      * Creates new form MenuEjercicios
@@ -17,6 +39,29 @@ public class MenuEjercicios extends javax.swing.JFrame {
     public MenuEjercicios() {
         initComponents();
         refreshCbxDescripcion();
+    }
+    
+    public MenuEjercicios(ProgramaEntrenamiento pProgramaEntrenamiento) {
+        initComponents();
+        refreshCbxDescripcion();
+        refreshTblEjercicios();
+        programaEntrenamiento = pProgramaEntrenamiento;
+        ejerciciosActuales = programaEntrenamiento.getDiasEjercicio().get(0);
+    }
+    
+    public void refreshCbxDiaEjercicio()
+    {
+        cbx_DiaEjercicio.removeAllItems();
+        
+        int canDiasEjercicio = programaEntrenamiento.getDiasEjercicio().size();
+        for(int index = 0; index < canDiasEjercicio; index++)
+        {
+            String diaDesp = "Día " + Integer.toString(index + 1);
+            cbx_DiaEjercicio.addItem((Object) diaDesp);
+        }
+        
+        int index = cbx_DiaEjercicio.getSelectedIndex();
+        ejerciciosActuales = programaEntrenamiento.getDiasEjercicio().get(index);
     }
     
     public void refreshCbxDescripcion()
@@ -27,6 +72,49 @@ public class MenuEjercicios extends javax.swing.JFrame {
         {
             cbx_Descripcion.addItem((Object)desEjercicio);
         }
+    }
+    
+    public void refreshTblEjercicios()
+    {
+        int listSize = ejerciciosActuales.size();
+        String[][] ejerciciosDatos = new String[listSize][2];
+        for(int index = 0; index < listSize; index++)
+        {
+            Ejercicio ejercicio = ejerciciosActuales.get(index);
+            ejerciciosDatos[index][0]= ejercicio.getNumEjercicio();
+            ejerciciosDatos[index][1] = ejercicio.getDescripcion();
+        }
+        
+        ejerciciosTableModel.setDataVector(ejerciciosDatos, ejerciciosHeaders);
+        tbl_Ejercicios.setModel(ejerciciosTableModel);
+        
+    }
+    
+    private boolean esFormularioValido()
+    {
+        boolean res = true;
+        
+        int numSeries = (Integer)spr_NumSeries.getValue();
+        int numRepeticiones = (Integer)spr_NumRepeticiones.getValue();
+        int tiempoDescanso = (Integer)spr_TiempoDescanso.getValue();
+        
+        res = (numSeries > 0) && (numRepeticiones > 0) && (tiempoDescanso > 0);
+        
+        return res;
+    }
+    
+    private void cleanForm()
+    {
+        tf_NumEjercicio.setText("");
+        cbx_Descripcion.setSelectedIndex(0);
+        spr_NumSeries.repaint();
+        spr_NumRepeticiones.repaint();
+        spr_Peso1.repaint();
+        spr_Peso2.repaint();
+        spr_Peso3.repaint();
+        spr_TiempoDescanso.repaint();
+        ejercicioActual = null;
+        
     }
     
 
@@ -42,7 +130,7 @@ public class MenuEjercicios extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         cbx_DiaEjercicio = new javax.swing.JComboBox();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbl_Ejercicios = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -64,6 +152,8 @@ public class MenuEjercicios extends javax.swing.JFrame {
         btn_Guardar = new javax.swing.JButton();
         btn_Cancelar = new javax.swing.JButton();
         btn_Borrar = new javax.swing.JButton();
+        btn_AgregarDia = new javax.swing.JButton();
+        btn_BorrarDia = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -71,8 +161,13 @@ public class MenuEjercicios extends javax.swing.JFrame {
         jLabel1.setText("Dia Ejercicio");
 
         cbx_DiaEjercicio.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbx_DiaEjercicio.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbx_DiaEjercicioItemStateChanged(evt);
+            }
+        });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_Ejercicios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -83,7 +178,12 @@ public class MenuEjercicios extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        tbl_Ejercicios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_EjerciciosMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tbl_Ejercicios);
 
         jLabel2.setText("Num Ejercicio");
 
@@ -112,7 +212,7 @@ public class MenuEjercicios extends javax.swing.JFrame {
 
         spr_TiempoDescanso.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
 
-        spr_Peso1.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
+        spr_Peso1.setModel(new javax.swing.SpinnerNumberModel(Double.valueOf(0.0d), Double.valueOf(0.0d), null, Double.valueOf(0.5d)));
 
         spr_Peso3.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
 
@@ -123,6 +223,11 @@ public class MenuEjercicios extends javax.swing.JFrame {
         cbx_Descripcion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         btn_Guardar.setText("Guardar");
+        btn_Guardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_GuardarActionPerformed(evt);
+            }
+        });
 
         btn_Cancelar.setText("Cancelar");
         btn_Cancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -132,6 +237,25 @@ public class MenuEjercicios extends javax.swing.JFrame {
         });
 
         btn_Borrar.setText("Borrar");
+        btn_Borrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_BorrarActionPerformed(evt);
+            }
+        });
+
+        btn_AgregarDia.setText("Agregar");
+        btn_AgregarDia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_AgregarDiaActionPerformed(evt);
+            }
+        });
+
+        btn_BorrarDia.setText("Borrar");
+        btn_BorrarDia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_BorrarDiaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -143,7 +267,11 @@ public class MenuEjercicios extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addComponent(cbx_DiaEjercicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cbx_DiaEjercicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btn_AgregarDia)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_BorrarDia))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(49, 49, 49)
@@ -191,7 +319,9 @@ public class MenuEjercicios extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(cbx_DiaEjercicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbx_DiaEjercicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_AgregarDia)
+                    .addComponent(btn_BorrarDia))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
@@ -248,7 +378,122 @@ public class MenuEjercicios extends javax.swing.JFrame {
 
     private void btn_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CancelarActionPerformed
         this.dispose();
+        
     }//GEN-LAST:event_btn_CancelarActionPerformed
+
+    private void btn_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_GuardarActionPerformed
+        if(esFormularioValido())
+        {
+            String numEjercicio = tf_NumEjercicio.getText();
+            String descripcion = (String)cbx_Descripcion.getSelectedItem();
+            int numSeries = (Integer)spr_NumSeries.getValue();
+            int numRepeticiones = (Integer)spr_NumRepeticiones.getValue();
+            int tiempoDescanso = (Integer)spr_TiempoDescanso.getValue();
+            double peso1 = (Double)spr_Peso1.getValue();
+            double peso2 = (Double)spr_Peso2.getValue();
+            double peso3 = (Double)spr_Peso3.getValue();
+
+            int indexCbxMaquina = cbx_Maquina.getSelectedIndex();
+            Maquina maquina = indexCbxMaquina > 0 ? (Maquina)cbx_Maquina.getSelectedItem() : null;
+
+            try
+            {
+
+                ejercicioActual.setNumEjercicio(numEjercicio);
+                ejercicioActual.setDescripcion(descripcion);
+                ejercicioActual.setNumSeries(numSeries);
+                ejercicioActual.setNumRepeticiones(numRepeticiones);
+                ejercicioActual.setTiempoDescanso(tiempoDescanso);
+                ejercicioActual.setPeso1(peso1);
+                ejercicioActual.setPeso2(peso2);
+                ejercicioActual.setPeso3(peso3);
+                ejercicioActual.setMaquina(maquina);
+
+            }
+            catch(NullPointerException ex)
+            {
+                ejercicioActual = new Ejercicio();
+                ejercicioActual.setNumEjercicio(numEjercicio);
+                ejercicioActual.setDescripcion(descripcion);
+                ejercicioActual.setNumSeries(numSeries);
+                ejercicioActual.setNumRepeticiones(numRepeticiones);
+                ejercicioActual.setTiempoDescanso(tiempoDescanso);
+                ejercicioActual.setPeso1(peso1);
+                ejercicioActual.setPeso2(peso2);
+                ejercicioActual.setPeso3(peso3);
+                ejercicioActual.setMaquina(maquina);
+            }
+
+            ejerciciosActuales.add(ejercicioActual);
+            cleanForm();
+            refreshTblEjercicios();
+            JOptionPane.showMessageDialog(rootPane, peso3);
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this, "Algunos datos del formulario no son válidos");
+        }
+        
+    }//GEN-LAST:event_btn_GuardarActionPerformed
+
+    private void btn_BorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_BorrarActionPerformed
+        ejerciciosActuales.remove(ejercicioActual);
+        refreshTblEjercicios();
+        cleanForm();
+    }//GEN-LAST:event_btn_BorrarActionPerformed
+
+    private void tbl_EjerciciosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_EjerciciosMouseClicked
+        int indexRow = tbl_Ejercicios.getSelectedRow();
+        
+        String numEjercicio = (String)tbl_Ejercicios.getValueAt(indexRow, 0);
+        
+        for(Ejercicio ejercicio : ejerciciosActuales)
+        {
+            if(numEjercicio.equals(ejercicio.getNumEjercicio()))
+            {
+                ejercicioActual = ejercicio;
+                return;
+            }
+        }
+        
+        tf_NumEjercicio.setText(ejercicioActual.getNumEjercicio());
+        cbx_Descripcion.setSelectedItem((Object)ejercicioActual.getDescripcion());
+        spr_NumSeries.setValue((Object)ejercicioActual.getNumSeries());
+        spr_NumRepeticiones.setValue((Object)ejercicioActual.getNumRepeticiones());
+        spr_TiempoDescanso.setValue((Object)ejercicioActual.getTiempoDescanso());
+        spr_Peso1.setValue((Object)ejercicioActual.getPeso1());
+        spr_Peso2.setValue((Object)ejercicioActual.getPeso2());
+        spr_Peso3.setValue((Object)ejercicioActual.getPeso3());
+        if(ejercicioActual.getMaquina() != null)
+        {
+            cbx_Maquina.setSelectedItem((Object)ejercicioActual.getMaquina());
+        }
+        
+    }//GEN-LAST:event_tbl_EjerciciosMouseClicked
+
+    private void cbx_DiaEjercicioItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbx_DiaEjercicioItemStateChanged
+        int index = cbx_DiaEjercicio.getSelectedIndex();
+        ejerciciosActuales = programaEntrenamiento.getDiasEjercicio().get(index);
+        refreshTblEjercicios();
+    }//GEN-LAST:event_cbx_DiaEjercicioItemStateChanged
+
+    private void btn_AgregarDiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AgregarDiaActionPerformed
+        int index = programaEntrenamiento.getDiasEjercicio().size();
+        String dia = "Día " + Integer.toString(index);
+        cbx_DiaEjercicio.addItem((Object)dia);
+        
+        programaEntrenamiento.getDiasEjercicio().remove(index);
+        refreshCbxDiaEjercicio();
+        refreshTblEjercicios();
+    }//GEN-LAST:event_btn_AgregarDiaActionPerformed
+
+    private void btn_BorrarDiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_BorrarDiaActionPerformed
+        int index = cbx_DiaEjercicio.getSelectedIndex();
+        cbx_DiaEjercicio.removeItemAt(index);
+        programaEntrenamiento.getDiasEjercicio().add(new ArrayList<>());
+        refreshCbxDiaEjercicio();
+        refreshTblEjercicios();
+    }//GEN-LAST:event_btn_BorrarDiaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -286,7 +531,9 @@ public class MenuEjercicios extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_AgregarDia;
     private javax.swing.JButton btn_Borrar;
+    private javax.swing.JButton btn_BorrarDia;
     private javax.swing.JButton btn_Cancelar;
     private javax.swing.JButton btn_Guardar;
     private javax.swing.JComboBox cbx_Descripcion;
@@ -303,13 +550,13 @@ public class MenuEjercicios extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JSpinner spr_NumRepeticiones;
     private javax.swing.JSpinner spr_NumSeries;
     private javax.swing.JSpinner spr_Peso1;
     private javax.swing.JSpinner spr_Peso2;
     private javax.swing.JSpinner spr_Peso3;
     private javax.swing.JSpinner spr_TiempoDescanso;
+    private javax.swing.JTable tbl_Ejercicios;
     private javax.swing.JTextField tf_NumEjercicio;
     // End of variables declaration//GEN-END:variables
 }

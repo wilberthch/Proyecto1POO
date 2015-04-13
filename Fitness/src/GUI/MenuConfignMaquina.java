@@ -7,71 +7,86 @@ package GUI;
 
 import Fitness.Ejercicio;
 import Fitness.Maquina;
+import Fitness.Paciente;
+import Fitness.ProgramaEntrenamiento;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author will
- * 
+ *
  */
 public class MenuConfignMaquina extends javax.swing.JFrame {
-    
-    
+
     public static final ArrayList<Maquina> maquinas = new ArrayList<>();
-    
+
     private final NonEditableTableModel maquinaTableModel = new NonEditableTableModel();
     private final String[] maquinaHeader = {"Num Maquina", "Descripción"};
-    
+
     private long numMaquinaActual = 0;
-    
-    
+
     /**
      * Creates new form MenuConfiguracion
      */
     public MenuConfignMaquina() {
         initComponents();
         refreshTblMaquina();
-        
-        
+
     }
-    
-    private boolean ExisteMaquina(long pNumMaquina)
-    {
+
+    private boolean ExisteMaquina(long pNumMaquina) {
         boolean res = false;
-        
-        for(Maquina maquina : maquinas)
-        {
+
+        for (Maquina maquina : maquinas) {
             res |= maquina.getNumMaquina() == pNumMaquina;
-        }   
+        }
         System.out.println(res);
         return res;
     }
-    
-    private void refreshTblMaquina()
-    {
+
+    private void refreshTblMaquina() {
         String[][] maquinaDatos = new String[maquinas.size()][2];
-        
-        
-        for(int index = 0; index > maquinas.size(); index ++)
-        {
+
+        for (int index = 0; index > maquinas.size(); index++) {
             Maquina maquina = maquinas.get(index);
-            
+
             maquinaDatos[index][0] = Long.toString(maquina.getNumMaquina());
             maquinaDatos[index][1] = maquina.getDescripcion();
         }
-        
+
         maquinaTableModel.setDataVector(maquinaDatos, maquinaHeader);
-        
+
         tbl_Maquina.setModel(maquinaTableModel);
     }
-    
-    private void clearForm()
-    {
+
+    private void clearForm() {
         tf_DescripMaquina.setText("");
         numMaquinaActual = 0;
     }
-    
+
+    private void removeMaquinaFromEverywhere(Maquina pMaquina) {
+        for (int indexPaciente = 0; indexPaciente < MenuPaciente.pacientes.size(); indexPaciente++) {
+            Paciente paciente = MenuPaciente.pacientes.get(indexPaciente);
+            int sizeProEntrenamiento = paciente.getProgramaEntrenamientoList().size();
+            for (int indexProEntrenamiento = 0; indexProEntrenamiento < sizeProEntrenamiento; indexProEntrenamiento++) {
+                ProgramaEntrenamiento proEntrenamiento
+                        = paciente.getProgramaEntrenamientoList().get(indexProEntrenamiento);
+
+                for (int indexDia = 0; indexDia < proEntrenamiento.getDiasEjercicio().size(); indexDia++) {
+                    ArrayList<Ejercicio> dia = proEntrenamiento.getDiasEjercicio().get(indexDia);
+                    for (int indexEjercicio = 0; indexEjercicio < dia.size(); indexEjercicio++) {
+                        Ejercicio ejercicio = dia.get(indexEjercicio);
+
+                        if (ejercicio.getMaquina() != null && pMaquina.equals(ejercicio.getMaquina())) {
+                            dia.remove(indexDia);
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -89,7 +104,6 @@ public class MenuConfignMaquina extends javax.swing.JFrame {
         btn_Borrar = new javax.swing.JButton();
         btn_Salir = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Configuración Máquina");
 
         tbl_Maquina.setModel(new javax.swing.table.DefaultTableModel(
@@ -168,37 +182,41 @@ public class MenuConfignMaquina extends javax.swing.JFrame {
 
     private void btn_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_GuardarActionPerformed
         String textoDescripcion = tf_DescripMaquina.getText();
-        if(!textoDescripcion.isEmpty() && !ExisteMaquina(numMaquinaActual))
-        {
+        if (!textoDescripcion.isEmpty() && !ExisteMaquina(numMaquinaActual)) {
             Maquina maquina = new Maquina(textoDescripcion);
             maquinas.add(maquina);
 
-            
             clearForm();
             refreshTblMaquina();
         }
     }//GEN-LAST:event_btn_GuardarActionPerformed
 
     private void btn_BorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_BorrarActionPerformed
-        Maquina maquinaBorrar = new Maquina();
-        for(Maquina maquina : maquinas)
+        
+        int res = JOptionPane.showConfirmDialog(this, "La máquina que desea borrar puede estar enlazada con programas de entrenamiento, ¿Desea borrar la máquina?");
+        if(res == 0)
         {
-            if(maquina.getNumMaquina() == numMaquinaActual)
-            {
-                maquinaBorrar = maquina;
-                break;
+            Maquina maquinaBorrar = new Maquina();
+            for (Maquina maquina : maquinas) {
+                if (maquina.getNumMaquina() == numMaquinaActual) {
+                    maquinaBorrar = maquina;
+                    break;
+                }
             }
+            removeMaquinaFromEverywhere(maquinaBorrar);
+            maquinas.remove(maquinaBorrar);
+            clearForm();
+            refreshTblMaquina();
         }
-        maquinas.remove(maquinaBorrar);
-        clearForm();
-        refreshTblMaquina();
+        
+        
     }//GEN-LAST:event_btn_BorrarActionPerformed
 
     private void tbl_MaquinaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_MaquinaMouseClicked
         int indexRow = tbl_Maquina.getSelectedRow();
         Object objetoNumMaquina = tbl_Maquina.getValueAt(indexRow, 0);
         numMaquinaActual = Long.parseLong(objetoNumMaquina.toString());
-        String textoDescripcion = (String)tbl_Maquina.getValueAt(indexRow, 1);
+        String textoDescripcion = (String) tbl_Maquina.getValueAt(indexRow, 1);
         tf_DescripMaquina.setText(textoDescripcion);
     }//GEN-LAST:event_tbl_MaquinaMouseClicked
 
