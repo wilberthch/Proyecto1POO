@@ -471,7 +471,15 @@ public class MenuProgramaEntrenamiento extends javax.swing.JFrame {
     }//GEN-LAST:event_tbl_programaEntrenamientoMouseClicked
 
     private void btn_EjerciciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EjerciciosActionPerformed
-        // TODO add your handling code here:
+        try
+        {
+            MenuEjercicios frameEjercicios = new MenuEjercicios(proEntrenamientoActual);
+            frameEjercicios.setVisible(true);
+        }
+        catch(NullPointerException ex)
+        {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
     }//GEN-LAST:event_btn_EjerciciosActionPerformed
 
     /**

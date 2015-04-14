@@ -7,6 +7,7 @@ package GUI;
 
 import Fitness.Ejercicio;
 import Fitness.Fecha;
+import Fitness.InternalEjercicioException;
 import Fitness.Maquina;
 import Fitness.Medida;
 import Fitness.ProgramaEntrenamiento;
@@ -41,7 +42,11 @@ public class MenuEjercicios extends javax.swing.JFrame {
         refreshCbxDescripcion();
     }
     
-    public MenuEjercicios(ProgramaEntrenamiento pProgramaEntrenamiento) {
+    public MenuEjercicios(ProgramaEntrenamiento pProgramaEntrenamiento) throws NullPointerException {
+        if(pProgramaEntrenamiento == null)
+        {
+            throw new NullPointerException("no hay programa de entrenamiento seleccionado");
+        }
         initComponents();
         refreshCbxDescripcion();
         refreshTblEjercicios();
@@ -410,19 +415,35 @@ public class MenuEjercicios extends javax.swing.JFrame {
                 ejercicioActual.setMaquina(maquina);
 
             }
+            catch(InternalEjercicioException ex)
+            {
+                JOptionPane.showMessageDialog(this, ex.getMessage());
+                return;
+            }
             catch(NullPointerException ex)
             {
-                ejercicioActual = new Ejercicio();
-                ejercicioActual.setNumEjercicio(numEjercicio);
-                ejercicioActual.setDescripcion(descripcion);
-                ejercicioActual.setNumSeries(numSeries);
-                ejercicioActual.setNumRepeticiones(numRepeticiones);
-                ejercicioActual.setTiempoDescanso(tiempoDescanso);
-                ejercicioActual.setPeso1(peso1);
-                ejercicioActual.setPeso2(peso2);
-                ejercicioActual.setPeso3(peso3);
-                ejercicioActual.setMaquina(maquina);
+                try
+                {
+                    
+
+                    ejercicioActual = new Ejercicio();
+                    ejercicioActual.setNumEjercicio(numEjercicio);
+                    ejercicioActual.setDescripcion(descripcion);
+                    ejercicioActual.setNumSeries(numSeries);
+                    ejercicioActual.setNumRepeticiones(numRepeticiones);
+                    ejercicioActual.setTiempoDescanso(tiempoDescanso);
+                    ejercicioActual.setPeso1(peso1);
+                    ejercicioActual.setPeso2(peso2);
+                    ejercicioActual.setPeso3(peso3);
+                    ejercicioActual.setMaquina(maquina);
+                }
+                catch(InternalEjercicioException e)
+                {
+                    JOptionPane.showMessageDialog(this, e.getMessage());
+                    return;
+                }
             }
+            
 
             ejerciciosActuales.add(ejercicioActual);
             cleanForm();
