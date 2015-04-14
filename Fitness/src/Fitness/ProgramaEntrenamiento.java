@@ -25,6 +25,7 @@ public class ProgramaEntrenamiento {
     public ProgramaEntrenamiento()
     {
         fechaCreacion = new Fecha(LocalDate.now());
+        diasEjercicio = new ArrayList<>();
         
     }
 
