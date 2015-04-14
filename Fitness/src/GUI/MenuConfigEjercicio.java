@@ -187,12 +187,13 @@ public class MenuConfigEjercicio extends javax.swing.JFrame {
     private void btn_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_GuardarActionPerformed
         
         String descripcion = tf_Descripcion.getText();
-        
+        System.out.println(indexTipoEjercicioActual);
         if(!descripcion.isEmpty())
         {
             if(indexTipoEjercicioActual > -1)
             {
                 tipoEjercicios.set(indexTipoEjercicioActual, descripcion);
+                System.out.println(tipoEjercicios.get(indexTipoEjercicioActual));
             }
             else
             {
@@ -200,6 +201,7 @@ public class MenuConfigEjercicio extends javax.swing.JFrame {
             }
         }
         refreshTblEjercicio();
+        clearForm();
         
         
     }//GEN-LAST:event_btn_GuardarActionPerformed
@@ -224,7 +226,7 @@ public class MenuConfigEjercicio extends javax.swing.JFrame {
     private void tbl_EjercicioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_EjercicioMouseClicked
         int indexRow = tbl_Ejercicio.getSelectedRow();
         Object objetoNumEjercicio = tbl_Ejercicio.getValueAt(indexRow, 0);
-        indexTipoEjercicioActual = Integer.parseInt(objetoNumEjercicio.toString()) + 1;
+        indexTipoEjercicioActual = Integer.parseInt(objetoNumEjercicio.toString()) - 1;
         String textoDescripcion = (String)tbl_Ejercicio.getValueAt(indexRow, 1);
         tf_Descripcion.setText(textoDescripcion);
         
