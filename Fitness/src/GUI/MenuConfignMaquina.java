@@ -49,7 +49,7 @@ public class MenuConfignMaquina extends javax.swing.JFrame {
     private void refreshTblMaquina() {
         String[][] maquinaDatos = new String[maquinas.size()][2];
 
-        for (int index = 0; index > maquinas.size(); index++) {
+        for (int index = 0; index < maquinas.size(); index++) {
             Maquina maquina = maquinas.get(index);
 
             maquinaDatos[index][0] = Long.toString(maquina.getNumMaquina());
@@ -206,9 +206,9 @@ public class MenuConfignMaquina extends javax.swing.JFrame {
             removeMaquinaFromEverywhere(maquinaBorrar);
             maquinas.remove(maquinaBorrar);
             clearForm();
-            refreshTblMaquina();
+            
         }
-        
+        refreshTblMaquina();
         
     }//GEN-LAST:event_btn_BorrarActionPerformed
 

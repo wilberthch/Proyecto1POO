@@ -216,8 +216,9 @@ public class MenuConfigEjercicio extends javax.swing.JFrame {
             }
 
             clearForm();
-            refreshTblEjercicio();
+            
         }
+        refreshTblEjercicio();
     }//GEN-LAST:event_btn_BorrarActionPerformed
 
     private void tbl_EjercicioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_EjercicioMouseClicked
