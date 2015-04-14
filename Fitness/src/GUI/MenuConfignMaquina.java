@@ -187,8 +187,9 @@ public class MenuConfignMaquina extends javax.swing.JFrame {
             maquinas.add(maquina);
 
             clearForm();
-            refreshTblMaquina();
+            
         }
+        refreshTblMaquina();
     }//GEN-LAST:event_btn_GuardarActionPerformed
 
     private void btn_BorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_BorrarActionPerformed
