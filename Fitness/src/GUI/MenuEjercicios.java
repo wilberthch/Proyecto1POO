@@ -30,7 +30,7 @@ public class MenuEjercicios extends javax.swing.JFrame {
     private static final String[] ejerciciosHeaders = {"Num Ejercicio","Descripción"};
     
     private ProgramaEntrenamiento programaEntrenamiento;
-    private ArrayList<Ejercicio> ejerciciosActuales;
+    private ArrayList<Ejercicio> ejerciciosActuales = new ArrayList<>();
     private Ejercicio ejercicioActual;
     
 
@@ -48,10 +48,14 @@ public class MenuEjercicios extends javax.swing.JFrame {
             throw new NullPointerException("no hay programa de entrenamiento seleccionado");
         }
         initComponents();
-        refreshCbxDescripcion();
-        refreshTblEjercicios();
+        
         programaEntrenamiento = pProgramaEntrenamiento;
-        ejerciciosActuales = programaEntrenamiento.getDiasEjercicio().get(0);
+        if(programaEntrenamiento.getDiasEjercicio().size() > 0)
+        {
+            ejerciciosActuales = programaEntrenamiento.getDiasEjercicio().get(0);
+            refreshCbxDescripcion();
+            refreshTblEjercicios();
+        }
     }
     
     public void refreshCbxDiaEjercicio()
