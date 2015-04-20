@@ -50,16 +50,19 @@ public class MenuEjercicios extends javax.swing.JFrame {
         initComponents();
         
         programaEntrenamiento = pProgramaEntrenamiento;
+        refreshCbxDescripcion();
+        refreshTblEjercicios();
+        refreshCbxDiaEjercicio();
         if(programaEntrenamiento.getDiasEjercicio().size() > 0)
         {
             ejerciciosActuales = programaEntrenamiento.getDiasEjercicio().get(0);
-            refreshCbxDescripcion();
-            refreshTblEjercicios();
+            
         }
     }
     
     public void refreshCbxDiaEjercicio()
     {
+        System.out.println("dia");
         cbx_DiaEjercicio.removeAllItems();
         
         int canDiasEjercicio = programaEntrenamiento.getDiasEjercicio().size();
@@ -165,6 +168,7 @@ public class MenuEjercicios extends javax.swing.JFrame {
         btn_BorrarDia = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Ejercicios");
 
         jLabel1.setLabelFor(cbx_DiaEjercicio);
         jLabel1.setText("Dia Ejercicio");
@@ -503,19 +507,20 @@ public class MenuEjercicios extends javax.swing.JFrame {
     }//GEN-LAST:event_cbx_DiaEjercicioItemStateChanged
 
     private void btn_AgregarDiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AgregarDiaActionPerformed
-        int index = programaEntrenamiento.getDiasEjercicio().size();
-        String dia = "Día " + Integer.toString(index);
-        cbx_DiaEjercicio.addItem((Object)dia);
         
-        programaEntrenamiento.getDiasEjercicio().remove(index);
+        int index = cbx_DiaEjercicio.getSelectedIndex();
+        cbx_DiaEjercicio.removeItemAt(index);
+        programaEntrenamiento.getDiasEjercicio().add(new ArrayList<>());
         refreshCbxDiaEjercicio();
         refreshTblEjercicios();
     }//GEN-LAST:event_btn_AgregarDiaActionPerformed
 
     private void btn_BorrarDiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_BorrarDiaActionPerformed
-        int index = cbx_DiaEjercicio.getSelectedIndex();
-        cbx_DiaEjercicio.removeItemAt(index);
-        programaEntrenamiento.getDiasEjercicio().add(new ArrayList<>());
+        int index = programaEntrenamiento.getDiasEjercicio().size();
+        String dia = "Día " + Integer.toString(index);
+        cbx_DiaEjercicio.addItem((Object)dia);
+        
+        programaEntrenamiento.getDiasEjercicio().remove(index);
         refreshCbxDiaEjercicio();
         refreshTblEjercicios();
     }//GEN-LAST:event_btn_BorrarDiaActionPerformed
